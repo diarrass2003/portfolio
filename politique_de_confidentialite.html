@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politique de Confidentialité - Diarrassouba</title>
+    <link rel="stylesheet" href="Assets/css/all.min.css">
+    <style>
+        @import url('Assets/fonts/css2.css?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f9fafb;
+            color: #111827;
+        }
+        .dark body {
+            background-color: #111827;
+            color: #f3f4f6;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: #3b82f6;
+            color: #fff;
+            border-bottom: 2px solid #2563eb;
+        }
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        .navbar .logo i {
+            margin-right: 0.5rem;
+        }
+        .navbar nav a {
+            color: #fff;
+            margin-left: 1.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .navbar nav a:hover, .navbar nav a.active {
+            color: #dbeafe;
+            text-decoration: underline;
+        }
+        .dark .navbar {
+            background: #1e293b;
+            border-bottom: 2px solid #3b82f6;
+        }
+        .dark .navbar nav a {
+            color: #93c5fd;
+        }
+        .dark .navbar nav a:hover, .dark .navbar nav a.active {
+            color: #60a5fa;
+        }
+        .toggle-dark {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            margin-left: 1.5rem;
+            transition: color 0.3s;
+        }
+        .toggle-dark:focus {
+            outline: 2px solid #2563eb;
+        }
+        .dark .toggle-dark {
+            color: #93c5fd;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto 0 auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 24px rgba(59,130,246,0.07);
+        }
+        .dark .container {
+            background: #1e293b;
+            box-shadow: 0 4px 24px rgba(30,41,59,0.2);
+        }
+        .logo {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        h1 {
+            color: #3b82f6;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+        h2 {
+            color: #3b82f6;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        p, li {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .dark p, .dark li {
+            color: #d1d5db;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+        .dark a {
+            color: #93c5fd;
+        }
+        .dark a:hover {
+            color: #60a5fa;
+        }
+        .last-updated {
+            font-style: italic;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+        }
+        .dark .last-updated {
+            color: #6b7280;
+        }
+        .card {
+            background: #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .dark .card {
+            background: #334155;
+        }
+        .toc {
+            background: #f1f5f9;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+        .dark .toc {
+            background: #1e293b;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        .toc a {
+            color: #2563eb;
+            font-weight: 500;
+        }
+        .dark .toc a {
+            color: #60a5fa;
+        }
+        .back-to-top {
+            display: inline-block;
+            margin-top: 2rem;
+            background: #3b82f6;
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(59,130,246,0.08);
+            transition: background 0.3s;
+        }
+        .back-to-top:hover {
+            background: #2563eb;
+        }
+        .dark .back-to-top {
+            background: #2563eb;
+        }
+        .dark .back-to-top:hover {
+            background: #3b82f6;
+        }
+        .contact-list i {
+            margin-right: 0.5rem;
+            color: #3b82f6;
+        }
+        .dark .contact-list i {
+            color: #60a5fa;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+            .navbar nav {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <header class="navbar" role="navigation" aria-label="Navigation principale">
+        <div class="logo"><i class="fas fa-shield-alt"></i> Diarrassouba</div>
+        <nav>
+            <a href="Portfolio.html">Accueil</a>
+            <a href="condition_d_utilisation.html">Conditions d'Utilisation</a>
+            <a href="politique_de_confidentialite.html" class="active">Confidentialité</a>
+            <button class="toggle-dark" id="toggleDark" aria-label="Basculer mode sombre/clair"><i class="fas fa-moon"></i></button>
+        </nav>
+    </header>
+    <div class="container">
+        <h1 id="top" class="gradient-text">Politique de Confidentialité</h1>
+        <p class="last-updated">Dernière mise à jour : 21 octobre 2024</p>
+        <nav class="toc" aria-label="Sommaire">
+            <strong>Sommaire</strong>
+            <ul>
+                <li><a href="#collecte">1. Collecte des informations</a></li>
+                <li><a href="#utilisation">2. Utilisation des informations</a></li>
+                <li><a href="#partage">3. Partage des informations</a></li>
+                <li><a href="#cookies">4. Cookies et technologies similaires</a></li>
+                <li><a href="#securite">5. Sécurité des données</a></li>
+                <li><a href="#liens">6. Liens vers d'autres sites</a></li>
+                <li><a href="#droits">7. Vos droits</a></li>
+                <li><a href="#modifications">8. Modifications de cette politique</a></li>
+                <li><a href="#contact">9. Me contacter</a></li>
+            </ul>
+        </nav>
+        <p>Bienvenue sur la politique de confidentialité de mon portfolio. Je m'engage à protéger votre vie privée et vos données personnelles. Cette politique explique comment je collecte, utilise et protège vos informations lorsque vous visitez mon site.</p>
+        <div class="card" id="collecte">
+            <h2>1. Collecte des informations</h2>
+            <p>Je peux collecter les types d'informations suivants :</p>
+            <ul>
+                <li><strong>Informations que vous fournissez</strong> : Lorsque vous me contactez via le formulaire, je collecte votre nom, email et message.</li>
+                <li><strong>Données de navigation</strong> : Informations sur votre appareil, adresse IP, type de navigateur et pages visitées.</li>
+                <li><strong>Cookies</strong> : Mon site utilise des cookies pour améliorer l'expérience utilisateur.</li>
+            </ul>
+        </div>
+        <div class="card" id="utilisation">
+            <h2>2. Utilisation des informations</h2>
+            <p>Les informations collectées sont utilisées pour :</p>
+            <ul>
+                <li>Répondre à vos demandes de contact</li>
+                <li>Améliorer mon site et l'expérience utilisateur</li>
+                <li>Analyser le trafic et les tendances d'utilisation</li>
+                <li>Prévenir les abus et assurer la sécurité</li>
+            </ul>
+        </div>
+        <div class="card" id="partage">
+            <h2>3. Partage des informations</h2>
+            <p>Je ne partage, ne vends ni ne loue vos informations personnelles à des tiers, sauf dans les cas suivants :</p>
+            <ul>
+                <li>Si requis par la loi</li>
+                <li>Pour protéger mes droits ou la sécurité des utilisateurs</li>
+                <li>Avec des prestataires de services qui aident à l'exploitation du site (hébergement, analytics)</li>
+            </ul>
+        </div>
+        <div class="card" id="cookies">
+            <h2>4. Cookies et technologies similaires</h2>
+            <p>Mon site utilise des cookies pour :</p>
+            <ul>
+                <li>Mémoriser vos préférences (comme le mode sombre)</li>
+                <li>Analyser l'utilisation du site via Google Analytics</li>
+                <li>Améliorer les performances</li>
+            </ul>
+            <p>Vous pouvez configurer votre navigateur pour refuser les cookies, mais certaines fonctionnalités du site pourraient ne plus fonctionner correctement.</p>
+        </div>
+        <div class="card" id="securite">
+            <h2>5. Sécurité des données</h2>
+            <p>Je mets en œuvre des mesures de sécurité raisonnables pour protéger vos informations. Cependant, aucune méthode de transmission sur Internet n'est 100% sécurisée.</p>
+        </div>
+        <div class="card" id="liens">
+            <h2>6. Liens vers d'autres sites</h2>
+            <p>Mon site peut contenir des liens vers d'autres sites. Je n'ai aucun contrôle sur leur contenu ou leurs pratiques de confidentialité.</p>
+        </div>
+        <div class="card" id="droits">
+            <h2>7. Vos droits</h2>
+            <p>Selon la législation applicable, vous pouvez :</p>
+            <ul>
+                <li>Demander accès à vos données personnelles</li>
+                <li>Demander leur rectification ou suppression</li>
+                <li>Vous opposer à leur traitement</li>
+                <li>Retirer votre consentement</li>
+            </ul>
+            <p>Pour exercer ces droits, contactez-moi via les coordonnées ci-dessous.</p>
+        </div>
+        <div class="card" id="modifications">
+            <h2>8. Modifications de cette politique</h2>
+            <p>Je peux mettre à jour cette politique occasionnellement. Les modifications prendront effet dès leur publication sur cette page.</p>
+        </div>
+        <div class="card" id="contact">
+            <h2>9. Me contacter</h2>
+            <ul class="contact-list">
+                <li><i class="fas fa-envelope"></i> Email : <a href="mailto:contact@diarrassouba.com">contact@diarrassouba.com</a></li>
+                <li><i class="fas fa-phone"></i> Téléphone : <a href="tel:+2250749679002">+225 07 49 67 90 02</a></li>
+                <li><i class="fas fa-map-marker-alt"></i> Adresse : Tiassalé, Côte d'Ivoire</li>
+            </ul>
+        </div>
+        <a href="#top" class="back-to-top" aria-label="Retour en haut"><i class="fas fa-arrow-up"></i> Haut de page</a>
+    </div>
+    <script src="Assets/fontawesome/fontawesome-free-6.7.2-web/js/all.min.js"></script>
+    <script>
+        // Dark mode toggle
+        const toggleBtn = document.getElementById('toggleDark');
+        const html = document.documentElement;
+        function setDarkMode(on) {
+            if (on) {
+                html.classList.add('dark');
+                localStorage.setItem('darkMode', 'true');
+                toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                html.classList.remove('dark');
+                localStorage.setItem('darkMode', 'false');
+                toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+        // Initial state
+        if (localStorage.getItem('darkMode') === 'true' || 
+            (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            setDarkMode(true);
+        } else {
+            setDarkMode(false);
+        }
+        toggleBtn.addEventListener('click', () => {
+            setDarkMode(!html.classList.contains('dark'));
+        });
+    </script>
+</body>
+</html>

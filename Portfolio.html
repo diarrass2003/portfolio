@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio professionnel de Diarrassouba, Développeur Full Stack avec expertise en React, Node.js et conception UI/UX">
+    <meta name="keywords" content="développeur, portfolio, fullstack, react, nodejs, javascript">
+    <meta name="author" content="Diarrassouba">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
+    <link rel="stylesheet" href="Assets/fontawesome/fontawesome-free-6.7.2-web/css/all.min.css"/>
+    <script src="Assets/js/browser@4.js"></script>
+    
+    <title>Diarrassouba | Développeur Full Stack - Portfolio Professionnel</title>
+    <style>
+        @import url('Assets/fonts/css2.css?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: gradient 3s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            perspective: 1000px;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .project-card:hover .project-card-inner {
+            transform: rotateY(5deg) rotateX(5deg);
+        }
+        
+        .skill-bar {
+            transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+            transform-origin: left;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #68D391;
+        }
+        
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #68D391;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block; 
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            bottom: -8px;
+            left: 20%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+        }
+        
+        .contact-input {
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .contact-input:focus {
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in, transform 1s ease-in;
+        }
+        
+
+        
+        .wave {
+            animation-name: wave-animation;
+            animation-duration: 2.5s;
+            animation-iteration-count: infinite;
+            transform-origin: 70% 70%;
+            display: inline-block;
+        }
+        
+        @keyframes wave-animation {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        /* Styles pour les classes Tailwind manquantes */
+        .bg-white\/90 { background-color: rgba(255, 255, 255, 0.9); }
+        .dark .bg-white\/90 { background-color: rgba(31, 41, 55, 0.9); }
+        .bg-gray-800\/90 { background-color: rgba(31, 41, 55, 0.9); }
+        .dark .bg-gray-800\/90 { background-color: rgba(31, 41, 55, 0.9); }
+        
+        .bg-blue-900\/30 { background-color: rgba(30, 58, 138, 0.3); }
+        .bg-purple-900\/30 { background-color: rgba(88, 28, 135, 0.3); }
+        .bg-green-900\/30 { background-color: rgba(20, 83, 45, 0.3); }
+        .bg-yellow-900\/30 { background-color: rgba(120, 113, 108, 0.3); }
+        .bg-red-900\/30 { background-color: rgba(127, 29, 29, 0.3); }
+        .bg-pink-900\/30 { background-color: rgba(131, 24, 67, 0.3); }
+        
+        .dark .bg-blue-900\/30 { background-color: rgba(30, 58, 138, 0.3); }
+        .dark .bg-purple-900\/30 { background-color: rgba(88, 28, 135, 0.3); }
+        .dark .bg-green-900\/30 { background-color: rgba(20, 83, 45, 0.3); }
+        .dark .bg-yellow-900\/30 { background-color: rgba(120, 113, 108, 0.3); }
+        .dark .bg-red-900\/30 { background-color: rgba(127, 29, 29, 0.3); }
+        .dark .bg-pink-900\/30 { background-color: rgba(131, 24, 67, 0.3); }
+        
+        .hover\:scale-\[1\.02\]:hover { transform: scale(1.02); }
+        .hover\:from-blue-700:hover { background-image: linear-gradient(to right, #1d4ed8, #3b82f6); }
+        .hover\:to-blue-600:hover { background-image: linear-gradient(to right, #2563eb, #3b82f6); }
+        
+        .backdrop-blur-md { 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+        }
+        
+        /* Styles pour le mode sombre */
+        .dark .bg-gray-50 { background-color: #070c16; }
+        .dark .bg-gray-100 { background-color: #0e131b; }
+        .dark .bg-gray-800 { background-color: #041732; }
+        .dark .bg-gray-900 { background-color: #111827; }
+        .dark .text-white { color: #ffffff; }
+        .dark .text-black-300 { color: #cfdaea; }
+        .dark .text-gray-400 { color: #a6b0be; }
+        .dark .text-gray-500 { color: #586270; }
+        .dark .text-gray-600 { color: #75787c; }
+        .dark .text-gray-700 { color: #e1e3e6; }
+        .dark .text-gray-800 { color: #b6babe; }
+        .dark .border-gray-600 { border-color: #4b5563; }
+        .dark .border-gray-700 { border-color: #626569; }
+        .dark .border-gray-800 { border-color: #1f2937; }
+        
+        /* Améliorations visuelles */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .dark .glass-effect {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+            padding: 2px;
+            border-radius: 12px;
+        }
+        
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: inherit;
+            border-radius: inherit;
+            z-index: -1;
+        }
+        
+        .typing-effect {
+            overflow: hidden;
+            border-right: 2px solid #3b82f6;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #3b82f6; }
+        }
+        
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-particle 6s ease-in-out infinite;
+        }
+        
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+        
+        .skill-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .skill-card:hover::before {
+            left: 100%;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            perspective: 1000px;
+            position: relative;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
+            z-index: -1;
+        }
+        
+        .project-card:hover::before {
+            opacity: 0.1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .contact-input:focus {
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            transform-origin: left;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    
+    <!-- Floating Particles -->
+    <div id="particles"></div>
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold gradient-text"> Portfolio de <br>Diarrassouba</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-blue-700 dark:text-black-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium">Accueil</a>
+                    <a href="#about" class="nav-link text-blue-700 dark:text-black-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium">À propos</a>
+                    <a href="#skills" class="nav-link text-blue-700 dark:text-black-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium">Compétences</a>
+                    <a href="#projects" class="nav-link text-blue-700 dark:text-black-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium">Projets</a>
+                    <a href="#contact" class="nav-link text-blue-700 dark:text-black-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium">Contact</a>
+                    
+                    <!-- Dark mode toggle -->
+                    <div class="flex items-center ml-4">
+                        <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                            <input type="checkbox" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out" title="Activer/désactiver le mode sombre"/>
+                            <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
+                        </div>
+                        <span class="text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-moon text-blue-600 dark:text-yellow-300"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-700 dark:text-gray-300 hover:text-blue-500 focus:outline-none" title="Ouvrir ou fermer le menu mobile">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 pb-6 px-4 shadow-lg">
+            <div class="flex flex-col space-y-4 py-4">
+                <a href="#home" class="nav-link text-blue-700 dark:text-black-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-2">Accueil</a>
+                <a href="#about" class="nav-link text-blue-700 dark:text-black-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-2">À propos</a>
+                <a href="#skills" class="nav-link text-blue-700 dark:text-black-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-2">Compétences</a>
+                <a href="#projects" class="nav-link text-blue-700 dark:text-black-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-2">Projets</a>
+                <a href="#contact" class="nav-link text-blue-700 dark:text-black-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium py-2">Contact</a>
+                
+                <div class="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <span class="text-gray-700 dark:text-gray-300 font-medium">Mode sombre:</span>
+                    <div class="flex items-center">
+                        <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                            <input type="checkbox" id="mobile-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out" title="Activer/désactiver le mode sombre (mobile)"/>
+                            <label for="mobile-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
+                        </div>
+                        <span class="text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-moon text-blue-600 dark:text-yellow-300"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-28 pb-16 md:pt-36 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto fade-in">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-12 md:mb-0">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 dark:text-white mb-4 leading-tight">
+                    Bonjour, je suis <span class="gradient-text typing-effect">Diarrassouba</span> <span class="wave">👋</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-gray-600 dark:text-gray-300 mb-6">
+                    Développeur Full Stack
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-lg text-lg">
+                    Je crée des expériences digitales exceptionnelles, rapides, accessibles et visuellement attrayantes. Créons quelque chose d'incroyable ensemble !
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#contact" class="btn-primary text-white px-8 py-3 rounded-lg font-medium text-center">
+                        <i class="fas fa-paper-plane mr-2"></i> Contactez-moi
+                    </a>
+                    <a href="#projects" class="gradient-border text-blue-600 dark:text-blue-400 px-8 py-3 rounded-lg font-medium transition duration-300 transform hover:scale-105 hover:bg-blue-50 dark:hover:bg-gray-800 text-center">
+                        <i class="fas fa-code mr-2"></i> Voir mes projets
+                    </a>
+                </div>
+                <div class="flex mt-8 space-x-5">
+                    
+                    <a href="https://github.com/diarrass2003" class="social-icon w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700">
+                       <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/yassoungo-youssouf-diarrassouba-0b7037306?utm_source=share&utm_campaign=" class="social-icon w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="https://x.com/YassoungoD?t=rpu0l7H1nqPEDPOKLiV6Bw&s=09" class="social-icon w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/diarr_assoubayassoungo?igsh=dTFvN3VpM3NzZHg2" class="social-icon w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-72 h-72 md:w-96 md:h-96">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 blur-xl animate-pulse"></div>
+                    <div class="relative w-full h-full flex items-center justify-center">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-1">
+                            <img src="Assets/images/20241021_120248.jpg"
+                                 alt="Profile"
+                                 class="w-full h-full rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-2xl floating">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gray-100 dark:bg-gray-800 rounded-3xl my-8 fade-in">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4 section-title">
+                À propos de moi
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Découvrez qui je suis, ce que je fais et mes expériences professionnelles
+            </p>
+        </div>
+                
+        <div class="flex flex-col lg:flex-row items-center lg:items-start gap-12">
+            <div class="lg:w-1/3 flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl opacity-20 blur-xl animate-pulse"></div>
+                    <div class="relative w-full h-full flex items-center justify-center">
+                        <div class="w-56 h-56 md:w-72 md:h-72 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 p-1">
+                            <img src="Assets/images/20241021_120248.jpg"
+                                 alt="Profile"
+                                 class="w-full h-full rounded-2xl object-cover border-4 border-white dark:border-gray-800 shadow-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    
+            <div class="lg:w-2/3">
+                <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-6">
+                    Qui suis-je ?
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-6 text-lg leading-relaxed">
+                    Je suis un développeur Full Stack passionné avec plus de 5 ans d'expérience dans la création d'applications web modernes. Je me spécialise dans les technologies JavaScript sur l'ensemble de la stack (React.js, Node.js, Express, MongoDB) et j'aime créer des solutions innovantes qui résolvent des problèmes réels.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-code text-blue-600 dark:text-blue-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 dark:text-white text-lg">Développement Web</h4>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400">Création de sites web réactifs et interactifs avec les dernières technologies.</p>
+                    </div>
+                    
+                    <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-mobile-alt text-purple-600 dark:text-purple-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 dark:text-white text-lg">Applications Mobile</h4>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400">Développement d'applications mobiles cross-platform avec Flutter.</p>
+                    </div>
+                    
+                    <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-green-100 dark:bg-green-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-server text-green-600 dark:text-green-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 dark:text-white text-lg">Backend</h4>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400">Construction d'APIs robustes et de logiques serveur performantes.</p>
+                    </div>
+                    
+                    <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-yellow-100 dark:bg-yellow-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-paint-brush text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 dark:text-white text-lg">UI/UX Design</h4>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400">Conception d'interfaces utilisateur intuitives et expériences utilisateur optimisées.</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#" class="btn-primary text-white px-6 py-3 rounded-lg font-medium text-center">
+                        <i class="fas fa-download mr-2"></i> Télécharger CV
+                    </a>
+                    <a href="#contact" class="gradient-border text-blue-600 dark:text-blue-400 px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:scale-105 hover:bg-blue-50 dark:hover:bg-gray-700 text-center">
+                        <i class="fas fa-paper-plane mr-2"></i> Me contacter
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Experience Timeline -->
+        <div class="mt-16">
+            <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-8 text-center">Mon Parcours</h3>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-lg text-gray-800 dark:text-white">Développeur Full Stack</h4>
+                            <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full">2021 - Présent</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-2">Tech Solutions Inc.</p>
+                        <p class="text-gray-600 dark:text-gray-400">Développement et maintenance d'applications web complètes avec React, Node.js et MongoDB. Collaboration avec les équipes produit et design pour créer des solutions optimales.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-lg text-gray-800 dark:text-white">Développeur Frontend</h4>
+                            <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full">2019 - 2021</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-2">Digital Creations</p>
+                        <p class="text-gray-600 dark:text-gray-400">Implémentation d'interfaces utilisateur réactives avec React et Redux. Optimisation des performances et accessibilité des applications web.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-lg text-gray-800 dark:text-white">Diplôme en Informatique</h4>
+                            <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full">2015 - 2019</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-2">Université de Technologie</p>
+                        <p class="text-gray-600 dark:text-gray-400">Spécialisation en développement web et bases de données. Projets pratiques en équipe et développement de compétences en résolution de problèmes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto fade-in">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4 section-title">
+                Mes Compétences
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Un aperçu de mes compétences techniques et professionnelles
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-6">Compétences Techniques</h3>
+                
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">HTML/CSS</span>
+                            <span class="text-gray-500 dark:text-gray-400">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                            <div class="skill-bar bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">JavaScript</span>
+                            <span class="text-gray-500 dark:text-gray-400">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                            <div class="skill-bar bg-gradient-to-r from-purple-500 to-purple-600 h-3 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">React.js</span>
+                            <span class="text-gray-500 dark:text-gray-400">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                            <div class="skill-bar bg-gradient-to-r from-green-500 to-green-600 h-3 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">Node.js</span>
+                            <span class="text-gray-500 dark:text-gray-400">80%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                            <div class="skill-bar bg-gradient-to-r from-yellow-500 to-yellow-600 h-3 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">SQL</span>
+                            <span class="text-gray-500 dark:text-gray-400">75%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                            <div class="skill-bar bg-gradient-to-r from-red-500 to-red-600 h-3 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-6">Compétences Professionnelles</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="skill-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-users text-blue-600 dark:text-blue-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 dark:text-white">Travail d'équipe</h4>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400">Collaboration efficace avec les membres de l'équipe pour atteindre des objectifs communs.</p>
+                    </div>
+                    
+                    <div class="skill-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-lightbulb text-purple-600 dark:text-purple-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 dark:text-white">Créativité</h4>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400">Solutions innovantes pour résoudre des problèmes complexes.</p>
+                    </div>
+                    
+                    <div class="skill-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-green-100 dark:bg-green-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-comments text-green-600 dark:text-green-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 dark:text-white">Communication</h4>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400">Communication claire et efficace avec les clients et collègues.</p>
+                    </div>
+                    
+                    <div class="skill-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-yellow-100 dark:bg-yellow-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-tasks text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 dark:text-white">Gestion de projet</h4>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400">Gestion de projets du début à la fin avec méthodologie agile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Technologies -->
+        <div class="mt-16">
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-8 text-center">Technologies que j'utilise</h3>
+            
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="tech-item flex flex-col items-center p-4">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-md mb-2">
+                        <i class="fab fa-html5 text-3xl text-orange-500"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 text-sm">HTML5</span>
+                </div>
+                
+                <div class="tech-item flex flex-col items-center p-4">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-md mb-2">
+                        <i class="fab fa-css3 text-3xl text-blue-500"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 text-sm">CSS3</span>
+                </div>
+                
+                <div class="tech-item flex flex-col items-center p-4">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-md mb-2">
+                        <i class="fab fa-js-square text-3xl text-yellow-400"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 text-sm">JavaScript</span>
+                </div>
+                
+                <div class="tech-item flex flex-col items-center p-4">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-md mb-2">
+                        <i class="fab fa-react text-3xl text-blue-400"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 text-sm">React</span>
+                </div>
+                
+                <div class="tech-item flex flex-col items-center p-4">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-md mb-2">
+                        <i class="fab fa-node-js text-3xl text-green-500"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 text-sm">Node.js</span>
+                </div>
+                
+                <div class="tech-item flex flex-col items-center p-4">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-md mb-2">
+                        <i class="fas fa-database text-3xl text-blue-600"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 text-sm">SQL</span>
+                </div>
+                
+                <div class="tech-item flex flex-col items-center p-4">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-md mb-2">
+                        <i class="fab fa-git text-3xl text-orange-600"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 text-sm">Git</span>
+                </div>
+                
+                <div class="tech-item flex flex-col items-center p-4">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-md mb-2">
+                        <i class="fas fa-palette text-3xl text-purple-500"></i>
+                    </div>
+                    <span class="text-gray-700 dark:text-gray-300 text-sm">Figma</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gray-100 dark:bg-gray-800 rounded-3xl my-8 fade-in">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4 section-title">
+                Mes Projets
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
+                Voici quelques-uns de mes projets récents. Chaque projet a été construit avec différentes technologies.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-card-inner bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-md h-full">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                              alt="Project 1"
+                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="text-xl font-bold text-white">Plateforme E-commerce</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Une plateforme e-commerce complète avec listes de produits, fonctionnalité de panier et traitement des paiements.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">React</span>
+                            <span class="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">Node.js</span>
+                            <span class="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 text-xs px-3 py-1 rounded-full">MongoDB</span>
+                        </div>
+                        <div class="flex justify-between mt-6">
+                            <a href="https://github.com/diarrass2003" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center">
+                                <i class="fab fa-github mr-2"></i> Code
+                            </a>
+                            <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-card-inner bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-md h-full">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                              alt="Project 2"
+                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="text-xl font-bold text-white">Application de Gestion de Tâches</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Une application de productivité pour gérer les tâches avec fonctionnalité de glisser-déposer et collaboration d'équipe.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">Vue.js</span>
+                            <span class="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 text-xs px-3 py-1 rounded-full">Firebase</span>
+                            <span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 text-xs px-3 py-1 rounded-full">Tailwind CSS</span>
+                        </div>
+                        <div class="flex justify-between mt-6">
+                            <a href="https://github.com/diarrass2003" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center">
+                                <i class="fab fa-github mr-2"></i> Code
+                            </a>
+                            <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-card-inner bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-md h-full">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80"
+                              alt="Project 3"
+                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="text-xl font-bold text-white">Tableau de Bord Réseaux Sociaux</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Tableau de bord analytique pour les gestionnaires de réseaux sociaux pour suivre les performances sur plusieurs plateformes.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full">React</span>
+                            <span class="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 text-xs px-3 py-1 rounded-full">D3.js</span>
+                            <span class="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 text-xs px-3 py-1 rounded-full">Express</span>
+                        </div>
+                        <div class="flex justify-between mt-6">
+                            <a href="https://github.com/diarrass2003" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center">
+                                <i class="fab fa-github mr-2"></i> Code
+                            </a>
+                            <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="#" class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                Voir Tous Mes Projets <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto fade-in">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4 section-title">
+                Contactez-moi
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
+                Vous avez un projet en tête ou souhaitez discuter d'opportunités potentielles ? N'hésitez pas à me contacter !
+            </p>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row gap-12">
+            <div class="lg:w-1/2">
+                <form id="contactForm" class="space-y-6">
+                    <div id="formMessage" class="hidden p-4 rounded-lg mb-6"></div>
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Votre nom *</label>
+                        <input type="text" id="name" name="name" required 
+                            class="contact-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition">
+                        <div id="nameError" class="text-red-500 text-sm mt-1 hidden">Veuillez entrer votre nom</div>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Adresse email *</label>
+                        <input type="email" id="email" name="email" required
+                            class="contact-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition">
+                        <div id="emailError" class="text-red-500 text-sm mt-1 hidden">Veuillez entrer une adresse email valide</div>
+                    </div>
+                    
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Sujet *</label>
+                        <input type="text" id="subject" name="subject" required
+                            class="contact-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition">
+                        <div id="subjectError" class="text-red-500 text-sm mt-1 hidden">Veuillez entrer un sujet</div>
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message *</label>
+                        <textarea id="message" name="message" rows="5" required
+                                class="contact-input w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition"></textarea>
+                        <div id="messageError" class="text-red-500 text-sm mt-1 hidden">Veuillez entrer votre message</div>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" 
+                            class="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-6 py-4 rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center">
+                        <span id="submitText">Envoyer le message <i class="fas fa-paper-plane"></i></span>
+                            
+                        <span id="submitSpinner" class="ml-2 hidden">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </span>
+                    </button>
+                </form>
+            </div>
+            
+            <div class="lg:w-1/2">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 h-full">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-6">Informations de Contact</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-blue-600 dark:text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-white mb-1">Localisation</h4>
+                                <p class="text-gray-600 dark:text-gray-400">Tiassalé, Côte d'Ivoire</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-purple-600 dark:text-purple-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-white mb-1">Email</h4>
+                                <p class="text-gray-600 dark:text-gray-400">contact@diarrassouba.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-green-100 dark:bg-green-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-green-600 dark:text-green-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-white mb-1">Téléphone</h4>
+                                <p class="text-gray-600 dark:text-gray-400">+225 07 49 67 90 02</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 dark:bg-yellow-900/30 p-3 rounded-full mr-4">
+                                <i class="fas fa-clock text-yellow-600 dark:text-yellow-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-white mb-1">Heures de travail</h4>
+                                <p class="text-gray-600 dark:text-gray-400">Lun-Ven: 9h - 17h</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <h4 class="font-semibold text-gray-800 dark:text-white mb-6">Suivez-moi</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://x.com/YassoungoD?t=rpu0l7H1nqPEDPOKLiV6Bw&s=09" class="social-icon w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800/50 transition">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/yassoungo-youssouf-diarrassouba-0b7037306?utm_source=share&utm_campaign=" class="social-icon w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800/50 transition">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                            <a href="https://github.com/diarrass2003" class="social-icon w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon w-12 h-12 bg-pink-100 dark:bg-pink-900/30 rounded-full flex items-center justify-center text-pink-600 dark:text-pink-400 hover:bg-pink-200 dark:hover:bg-pink-800/50 transition">
+                                <i class="fab fa-dribbble text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row justify-between items-start">
+                <div class="mb-8 lg:mb-0">
+                    <span class="text-2xl font-bold gradient-text">Diarrassouba</span>
+                    <p class="text-gray-400 mt-4 max-w-md">
+                        Création d'expériences digitales rapides, accessibles et visuellement attrayantes.
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="https://github.com/diarrass2003" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/yassoungo-youssouf-diarrassouba-0b7037306?utm_source=share&utm_campaign=" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="https://x.com/YassoungoD?t=rpu0l7H1nqPEDPOKLiV6Bw&s=09" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="https://www.instagram.com/diarr_assoubayassoungo?igsh=dTFvN3VpM3NzZHg2" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Liens rapides</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#home" class="text-gray-400 hover:text-white transition">Accueil</a></li>
+                            <li><a href="#about" class="text-gray-400 hover:text-white transition">À propos</a></li>
+                            <li><a href="#skills" class="text-gray-400 hover:text-white transition">Compétences</a></li>
+                            <li><a href="#projects" class="text-gray-400 hover:text-white transition">Projets</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Services</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Développement Web</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Développement Mobile</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">UI/UX Design</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Consultation</a></li>
+                        </ul>
+                    </div>
+                     
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+                        <p class="text-gray-400 mb-4">Abonnez-vous à ma newsletter pour recevoir les dernières mises à jour.</p>
+                        <form class="flex">
+                            <input type="email" placeholder="Votre email" class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-800 w-full">
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-lg" title="Envoyer la newsletter">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">
+                    &copy; 2025 Diarrassouba. Tous droits réservés.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="politique_de_confidentialite.html" class="text-gray-400 hover:text-white transition">Politique de confidentialité</a>
+                    <a href="condition_d_utilisation.html" class="text-gray-400 hover:text-white transition">Conditions d'utilisation</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-gradient-to-br from-blue-500 to-blue-600 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 opacity-0 invisible hover:from-blue-600 hover:to-blue-700" title="Retour en haut">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.innerHTML = mobileMenu.classList.contains('hidden') ? 
+                '<i class="fas fa-bars text-2xl"></i>' : 
+                '<i class="fas fa-times text-2xl"></i>';
+        });
+        
+        // Dark mode toggle
+        const toggle = document.getElementById('toggle');
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved user preference, if any
+        if (localStorage.getItem('darkMode') === 'true') {
+            html.classList.add('dark');
+            toggle.checked = true;
+            mobileToggle.checked = true;
+        }
+        
+        // Toggle dark mode
+        function toggleDarkMode() {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            localStorage.setItem('darkMode', isDark);
+        }
+        
+        toggle.addEventListener('change', toggleDarkMode);
+        mobileToggle.addEventListener('change', toggleDarkMode);
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.innerHTML = '<i class="fas fa-bars text-2xl"></i>';
+                    }
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Animate skill bars when they come into view
+        const skillBars = document.querySelectorAll('.skill-bar');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0';
+                    setTimeout(() => {
+                        entry.target.style.width = width;
+                    }, 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        skillBars.forEach(bar => {
+            observer.observe(bar);
+        });
+        
+        // Add fade-in animation to sections as they come into view
+        const sections = document.querySelectorAll('.fade-in');
+        
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    sectionObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+        
+         // Formulaire de contact
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Réinitialiser les messages d'erreur
+                document.querySelectorAll('[id$="Error"]').forEach(el => el.classList.add('hidden'));
+                formMessage.classList.add('hidden');
+                
+                // Valider les champs
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value.trim();
+                const message = document.getElementById('message').value.trim();
+                
+                let isValid = true;
+                
+                if (!name) {
+                    document.getElementById('nameError').classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    document.getElementById('emailError').classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                if (!subject) {
+                    document.getElementById('subjectError').classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                if (!message) {
+                    document.getElementById('messageError').classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                if (!isValid) return;
+                
+                // Afficher le spinner
+                const submitBtn = document.getElementById('submitBtn');
+                const submitText = document.getElementById('submitText');
+                const submitSpinner = document.getElementById('submitSpinner');
+                
+                submitBtn.disabled = true;
+                submitText.textContent = 'Envoi en cours...';
+                submitSpinner.classList.remove('hidden');
+                
+                try {
+                    // Envoyer les données à un serveur (à adapter avec votre solution backend)
+                    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name,
+                            email,
+                            subject,
+                            message
+                        }),
+                    });
+                    
+                    if (response.ok) {
+                        // Succès
+                        formMessage.textContent = 'Message envoyé avec succès ! Je vous répondrai dès que possible.';
+                        formMessage.classList.remove('hidden');
+                        formMessage.classList.remove('bg-red-100', 'text-red-700', 'dark:bg-red-900/30', 'dark:text-red-200');
+                        formMessage.classList.add('bg-green-100', 'text-green-700', 'dark:bg-green-900/30', 'dark:text-green-200');
+                        
+                        // Réinitialiser le formulaire
+                        contactForm.reset();
+                    } else {
+                        throw new Error('Erreur lors de l\'envoi du message');
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    formMessage.textContent = 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard ou me contacter directement par email.';
+                    formMessage.classList.remove('hidden');
+                    formMessage.classList.remove('bg-green-100', 'text-green-700', 'dark:bg-green-900/30', 'dark:text-green-200');
+                    formMessage.classList.add('bg-red-100', 'text-red-700', 'dark:bg-red-900/30', 'dark:text-red-200');
+                } finally {
+                    // Réinitialiser le bouton
+                    submitBtn.disabled = false;
+                    submitText.textContent = 'Envoyer le message';
+                    submitSpinner.classList.add('hidden');
+                }
+            });
+        }
+        
+        // Scroll Progress Indicator
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollIndicator.style.transform = `scaleX(${scrollPercent / 100})`;
+        });
+        
+        // Floating Particles
+        const particlesContainer = document.getElementById('particles');
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 4 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            
+            particlesContainer.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 6000);
+        }
+        
+        // Create particles periodically
+        setInterval(createParticle, 2000);
+        
+        // Initial particles
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createParticle, i * 200);
+        }
+        
+        // Typing effect
+        const typingElement = document.querySelector('.typing-effect');
+        if (typingElement) {
+            const text = typingElement.textContent;
+            typingElement.textContent = '';
+            typingElement.style.width = '0';
+            
+            setTimeout(() => {
+                typingElement.style.width = '100%';
+                let i = 0;
+                const typeWriter = () => {
+                    if (i < text.length) {
+                        typingElement.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 100);
+                    }
+                };
+                typeWriter();
+            }, 1000);
+        }
+        
+        // Smooth reveal animation for skill cards
+        const skillCards = document.querySelectorAll('.skill-card');
+        
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        skillCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            skillObserver.observe(card);
+        });
+        
+        // Enhanced form validation with real-time feedback
+        const formInputs = document.querySelectorAll('.contact-input');
+        
+        formInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateField(this);
+                }
+            });
+        });
+        
+        function validateField(field) {
+            const value = field.value.trim();
+            const errorElement = document.getElementById(field.id + 'Error');
+            
+            if (!value) {
+                field.classList.add('error');
+                if (errorElement) errorElement.classList.remove('hidden');
+                return false;
+            }
+            
+            if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                field.classList.add('error');
+                if (errorElement) errorElement.classList.remove('hidden');
+                return false;
+            }
+            
+            field.classList.remove('error');
+            if (errorElement) errorElement.classList.add('hidden');
+            return true;
+        }
+        
+        // Add error styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .contact-input.error {
+                border-color: #ef4444 !important;
+                box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Performance optimization: Lazy loading for images
+        const images = document.querySelectorAll('img');
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src || img.src;
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+        
+        images.forEach(img => {
+            if (img.dataset.src) {
+                imageObserver.observe(img);
+            }
+        });
+        
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+        
+        // Add loaded class styles
+        const loadedStyle = document.createElement('style');
+        loadedStyle.textContent = `
+            body:not(.loaded) {
+                overflow: hidden;
+            }
+            
+            body.loaded .fade-in {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        `;
+        document.head.appendChild(loadedStyle);
+    </script>
+</body>
+</html>
