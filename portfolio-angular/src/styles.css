@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* ============================================================
+   ACCESSIBILITÉ GLOBALE
+   ============================================================ */
+
+/* --- Skip Link (Aller directement au contenu principal) ---
+   Invisible sauf quand l'élément reçoit le focus clavier.
+   Critique pour les utilisateurs de lecteurs d'écran et de clavier. */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 99999;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary, #6c63ff);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* --- Focus Visible Global ---
+   Outline cohérent et visible pour tous les éléments interactifs
+   navigables au clavier. On utilise :focus-visible pour ne pas
+   afficher l'outline lors du clic à la souris. */
+:focus-visible {
+  outline: 2px solid var(--primary, #6c63ff);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Supprime l'outline par défaut du navigateur uniquement quand
+   :focus-visible est supporté (pour ne pas pénaliser les anciens navigateurs) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* --- Réduction du Mouvement ---
+   Respecte la préférence système de l'utilisateur.
+   Désactive toutes les animations CSS pour les personnes
+   sensibles au mouvement (épilepsie, vertiges, etc.). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

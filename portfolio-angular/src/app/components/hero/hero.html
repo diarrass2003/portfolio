@@ -1,92 +1,97 @@
 <!-- Section Héro (Accueil) : Présentation principale de l'utilisateur avec effets visuels -->
-<section id="home" class="hero-section">
+<section id="home" class="hero-section" aria-labelledby="hero-title">
   <!-- Décoration d'arrière-plan dynamique (formes fluides "blobs") -->
-  <div class="hero-decorative-blobs">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
+  <div class="hero-decorative-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
   </div>
 
   <div class="hero-grid container">
-      <!-- Contenu gauche : Textes d'introduction, appel à l'action et réseaux sociaux -->
-      <div class="hero-content reveal">
-          <div class="hero-badge magnetic">
-              <span class="badge-dot"></span>
-              {{ translation.translate('hero.badge') }}
-          </div>
-
-          <h1 class="hero-title">
-              <span class="text-slide-up">{{ translation.translate('hero.greeting') }}</span><br>
-              <span class="gradient-text hero-name">Diarrassouba Yassoungo Y.</span>
-              <span class="wave-emoji">👋</span>
-          </h1>
-
-          <p class="hero-subtitle">{{ translation.translate('hero.title') }}</p>
-
-          <p class="hero-desc" [innerHTML]="translation.translate('hero.desc')"></p>
-
-          <!-- Boutons d'appel à l'action (Call to Action) -->
-          <div class="hero-cta">
-              <a href="#contact" class="btn-primary magnetic">
-                  <i class="fas fa-paper-plane"></i> {{ translation.translate('hero.cta_contact') }}
-              </a>
-              <a href="#projects" class="btn-outline magnetic">
-                  <i class="fas fa-code"></i> {{ translation.translate('hero.cta_projects') }}
-              </a>
-          </div>
-
-          <!-- Liens vers les réseaux sociaux -->
-          <div class="hero-socials">
-              <a href="https://github.com/LeYASSOUNG" target="_blank" rel="noopener noreferrer"
-                  class="social-btn social-github magnetic" title="GitHub">
-                  <i class="fab fa-github"></i>
-              </a>
-              <a href="https://www.linkedin.com/in/yassoungo-youssouf-diarrassouba-0b7037306" target="_blank"
-                  rel="noopener noreferrer" class="social-btn social-linkedin magnetic" title="LinkedIn">
-                  <i class="fab fa-linkedin-in"></i>
-              </a>
-              <a href="https://x.com/YassoungoD" target="_blank" rel="noopener noreferrer"
-                  class="social-btn social-twitter magnetic" title="X/Twitter">
-                  <i class="fab fa-twitter"></i>
-              </a>
-              <a href="https://www.instagram.com/diarr_assoubayassoungo" target="_blank" rel="noopener noreferrer"
-                  class="social-btn social-instagram magnetic" title="Instagram">
-                  <i class="fab fa-instagram"></i>
-              </a>
-          </div>
-
-          <!-- Grille de statistiques clés (Expérience, Projets, Services) -->
-          <div class="hero-stats glass-card">
-              <div class="stat-item">
-                  <div class="stat-number" [attr.data-target]="0">0+</div>
-                  <div class="stat-label">{{ translation.translate('hero.exp') }}</div>
-              </div>
-              <div class="stat-item">
-                  <div class="stat-number" [attr.data-target]="5">0+</div>
-                  <div class="stat-label">{{ translation.translate('hero.projects') }}</div>
-              </div>
-              <div class="stat-item">
-                  <div class="stat-number" [attr.data-target]="0">0+</div>
-                  <div class="stat-label">{{ translation.translate('hero.services') }}</div>
-              </div>
-          </div>
+    <!-- Contenu gauche : Textes d'introduction, appel à l'action et réseaux sociaux -->
+    <div class="hero-content reveal">
+      <div class="hero-badge magnetic" aria-hidden="true">
+        <span class="badge-dot"></span>
+        {{ translation.translate('hero.badge') }}
       </div>
 
-      <!-- Zone droite : Photo de profil animée et badges de compétences flottants -->
-      <div class="hero-image-area reveal">
-          <div class="hero-img-container">
-              <div class="hero-img-glow"></div>
-              <div class="hero-img-frame glass-card">
-                  <img src="Assets/images/image cv portfolio.jpeg" alt="Diarrassouba Yassoungo" class="hero-photo">
-              </div>
-              <div class="floating-badge fb-1 glass-card">
-                  <i class="fas fa-check-circle"></i>
-                  <span>{{ translation.translate('hero.quality') }}</span>
-              </div>
-              <div class="floating-badge fb-2 glass-card">
-                  <i class="fas fa-bolt"></i>
-                  <span>{{ translation.translate('hero.performance') }}</span>
-              </div>
-          </div>
+      <h1 id="hero-title" class="hero-title">
+        <span class="text-slide-up">{{ translation.translate('hero.greeting') }}</span><br>
+        <span class="gradient-text hero-name">Diarrassouba Yassoungo Y.</span>
+        <span class="wave-emoji" aria-hidden="true">👋</span>
+      </h1>
+
+      <p class="hero-subtitle">{{ translation.translate('hero.title') }}</p>
+
+      <p class="hero-desc" [innerHTML]="translation.translate('hero.desc')"></p>
+
+      <!-- Boutons d'appel à l'action (Call to Action) -->
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary magnetic">
+          <i class="fas fa-paper-plane" aria-hidden="true"></i> {{ translation.translate('hero.cta_contact') }}
+        </a>
+        <a href="#projects" class="btn-outline magnetic">
+          <i class="fas fa-code" aria-hidden="true"></i> {{ translation.translate('hero.cta_projects') }}
+        </a>
       </div>
+
+      <!-- Liens vers les réseaux sociaux -->
+      <div class="hero-socials" aria-label="Réseaux sociaux">
+        <a href="https://github.com/LeYASSOUNG" target="_blank" rel="noopener noreferrer"
+          class="social-btn social-github magnetic"
+          aria-label="Profil GitHub de Diarrassouba Yassoungo (nouvelle fenêtre)">
+          <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/yassoungo-youssouf-diarrassouba-0b7037306" target="_blank"
+          rel="noopener noreferrer" class="social-btn social-linkedin magnetic"
+          aria-label="Profil LinkedIn de Diarrassouba Yassoungo (nouvelle fenêtre)">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+        </a>
+        <a href="https://x.com/Yassoungo01" target="_blank" rel="noopener noreferrer"
+          class="social-btn social-twitter magnetic"
+          aria-label="Profil X/Twitter de Diarrassouba Yassoungo (nouvelle fenêtre)">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.instagram.com/diarr_assoubayassoungo" target="_blank" rel="noopener noreferrer"
+          class="social-btn social-instagram magnetic"
+          aria-label="Profil Instagram de Diarrassouba Yassoungo (nouvelle fenêtre)">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <!-- Grille de statistiques clés (Expérience, Projets, Services) -->
+      <div class="hero-stats glass-card" role="list" aria-label="Statistiques clés">
+        <div class="stat-item" role="listitem">
+          <div class="stat-number" [attr.data-target]="0" aria-live="polite">0+</div>
+          <div class="stat-label">{{ translation.translate('hero.exp') }}</div>
+        </div>
+        <div class="stat-item" role="listitem">
+          <div class="stat-number" [attr.data-target]="5" aria-live="polite">0+</div>
+          <div class="stat-label">{{ translation.translate('hero.projects') }}</div>
+        </div>
+        <div class="stat-item" role="listitem">
+          <div class="stat-number" [attr.data-target]="0" aria-live="polite">0+</div>
+          <div class="stat-label">{{ translation.translate('hero.services') }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone droite : Photo de profil animée et badges de compétences flottants -->
+    <div class="hero-image-area reveal" aria-hidden="true">
+      <div class="hero-img-container">
+        <div class="hero-img-glow"></div>
+        <div class="hero-img-frame glass-card">
+          <img src="Assets/images/portfo image-1.png" alt="Photo de profil de Diarrassouba Yassoungo"
+            class="hero-photo">
+        </div>
+        <div class="floating-badge fb-1 glass-card">
+          <i class="fas fa-check-circle" aria-hidden="true"></i>
+          <span>{{ translation.translate('hero.quality') }}</span>
+        </div>
+        <div class="floating-badge fb-2 glass-card">
+          <i class="fas fa-bolt" aria-hidden="true"></i>
+          <span>{{ translation.translate('hero.performance') }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

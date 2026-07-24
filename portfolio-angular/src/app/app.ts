@@ -9,7 +9,6 @@ import { routeAnimations } from './animations';
   selector: 'app-root',
   imports: [RouterOutlet, Navbar, Footer],
   templateUrl: './app.html',
-  styleUrl: './app.css',
   animations: [routeAnimations]
 })
 /**

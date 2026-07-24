@@ -1,8 +1,10 @@
 <!-- Section Compétences : Mise en avant des compétences techniques et soft skills -->
-<section id="skills" class="skills-section">
+<section id="skills" class="skills-section" aria-labelledby="skills-title">
   <div class="container">
       <div class="section-header reveal">
-          <h2 class="gradient-text"><i class="fas fa-tools"></i> {{ translation.translate('skills.title') }}</h2>
+          <h2 id="skills-title" class="gradient-text">
+            <i class="fas fa-tools" aria-hidden="true"></i> {{ translation.translate('skills.title') }}
+          </h2>
           <p>{{ translation.translate('skills.subtitle') }}</p>
       </div>
 
@@ -13,21 +15,22 @@
               <div class="skill-cards-container">
                   <div class="skill-glass-card glass-card magnetic">
                       <div class="skill-info">
-                          <span class="skill-name">Frontend Development</span>
-                          <span class="skill-pct">65%</span>
+                          <span class="skill-name" id="skill-frontend">Frontend Development</span>
+                          <span class="skill-pct" aria-hidden="true">65%</span>
                       </div>
-                      <div class="progress-bar">
+                      <!-- role="progressbar" expose la valeur aux lecteurs d'écran -->
+                      <div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" aria-labelledby="skill-frontend">
                           <div class="progress-fill fill-blue" [style.width.%]="90"></div>
                       </div>
-                      <p class="skill-detail">Angular,HTML,CSS, JavaScript, TypeScript, React, UI/UX, CSS Architecture</p>
+                      <p class="skill-detail">Angular, HTML, CSS, JavaScript, TypeScript, React, UI/UX, CSS Architecture</p>
                   </div>
 
                   <div class="skill-glass-card glass-card magnetic">
                       <div class="skill-info">
-                          <span class="skill-name">Backend Architecture</span>
-                          <span class="skill-pct">55%</span>
+                          <span class="skill-name" id="skill-backend">Backend Architecture</span>
+                          <span class="skill-pct" aria-hidden="true">55%</span>
                       </div>
-                      <div class="progress-bar">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" aria-labelledby="skill-backend">
                           <div class="progress-fill fill-purple" [style.width.%]="75"></div>
                       </div>
                       <p class="skill-detail">Node.js, Express, Spring Boot, API Design</p>
@@ -35,10 +38,10 @@
 
                   <div class="skill-glass-card glass-card magnetic">
                       <div class="skill-info">
-                          <span class="skill-name">Database Management</span>
-                          <span class="skill-pct">60%</span>
+                          <span class="skill-name" id="skill-database">Database Management</span>
+                          <span class="skill-pct" aria-hidden="true">60%</span>
                       </div>
-                      <div class="progress-bar">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" aria-labelledby="skill-database">
                           <div class="progress-fill fill-cyan" [style.width.%]="80"></div>
                       </div>
                       <p class="skill-detail">MySQL, PostgreSQL</p>
@@ -49,30 +52,30 @@
           <!-- Soft skills / Compétences interpersonnelles (Travail d'équipe, etc.) -->
           <div class="reveal">
               <h3 class="skill-title">{{ translation.translate('skills.soft_title') }}</h3>
-              <div class="soft-skills-grid">
-                  <div class="soft-item glass-card magnetic">
-                      <div class="soft-icon icon-blue"><i class="fas fa-users"></i></div>
+              <div class="soft-skills-grid" role="list">
+                  <div class="soft-item glass-card magnetic" role="listitem">
+                      <div class="soft-icon icon-blue" aria-hidden="true"><i class="fas fa-users"></i></div>
                       <div class="soft-content">
                           <h4>{{ translation.translate('skills.team') }}</h4>
                           <p>{{ translation.translate('skills.team_sub') }}</p>
                       </div>
                   </div>
-                  <div class="soft-item glass-card magnetic">
-                      <div class="soft-icon icon-purple"><i class="fas fa-lightbulb"></i></div>
+                  <div class="soft-item glass-card magnetic" role="listitem">
+                      <div class="soft-icon icon-purple" aria-hidden="true"><i class="fas fa-lightbulb"></i></div>
                       <div class="soft-content">
                           <h4>{{ translation.translate('skills.problem') }}</h4>
                           <p>{{ translation.translate('skills.problem_sub') }}</p>
                       </div>
                   </div>
-                  <div class="soft-item glass-card magnetic">
-                      <div class="soft-icon icon-green"><i class="fas fa-comments"></i></div>
+                  <div class="soft-item glass-card magnetic" role="listitem">
+                      <div class="soft-icon icon-green" aria-hidden="true"><i class="fas fa-comments"></i></div>
                       <div class="soft-content">
                           <h4>{{ translation.translate('skills.design') }}</h4>
                           <p>{{ translation.translate('skills.design_sub') }}</p>
                       </div>
                   </div>
-                  <div class="soft-item glass-card magnetic">
-                      <div class="soft-icon icon-yellow"><i class="fas fa-tasks"></i></div>
+                  <div class="soft-item glass-card magnetic" role="listitem">
+                      <div class="soft-icon icon-yellow" aria-hidden="true"><i class="fas fa-tasks"></i></div>
                       <div class="soft-content">
                           <h4>{{ translation.translate('skills.devops') }}</h4>
                           <p>{{ translation.translate('skills.devops_sub') }}</p>
@@ -86,30 +89,31 @@
       <div class="tech-stack-wrap reveal">
           <h3 class="skill-title text-center">Tech Stack</h3>
           <div class="tech-marquee-container">
-              <div class="tech-grid">
-                  <div class="tech-card magnetic glass-card" title="HTML5">
-                      <i class="fab fa-html5 color-html"></i>
+              <!-- role="list" sur la grille + role="img" sur chaque carte pour annoncer la technologie -->
+              <div class="tech-grid" role="list">
+                  <div class="tech-card magnetic glass-card" role="listitem" title="HTML5" aria-label="HTML5">
+                      <i class="fab fa-html5 color-html" aria-hidden="true"></i>
                   </div>
-                  <div class="tech-card magnetic glass-card" title="CSS3">
-                      <i class="fab fa-css3-alt color-css"></i>
+                  <div class="tech-card magnetic glass-card" role="listitem" title="CSS3" aria-label="CSS3">
+                      <i class="fab fa-css3-alt color-css" aria-hidden="true"></i>
                   </div>
-                  <div class="tech-card magnetic glass-card" title="JavaScript">
-                      <i class="fab fa-js-square color-js"></i>
+                  <div class="tech-card magnetic glass-card" role="listitem" title="JavaScript" aria-label="JavaScript">
+                      <i class="fab fa-js-square color-js" aria-hidden="true"></i>
                   </div>
-                  <div class="tech-card magnetic glass-card" title="TypeScript">
-                      <i class="fab fa-angular color-ts"></i>
+                  <div class="tech-card magnetic glass-card" role="listitem" title="Angular / TypeScript" aria-label="Angular / TypeScript">
+                      <i class="fab fa-angular color-ts" aria-hidden="true"></i>
                   </div>
-                  <div class="tech-card magnetic glass-card" title="React">
-                      <i class="fab fa-react color-react"></i>
+                  <div class="tech-card magnetic glass-card" role="listitem" title="React" aria-label="React">
+                      <i class="fab fa-react color-react" aria-hidden="true"></i>
                   </div>
-                  <div class="tech-card magnetic glass-card" title="Node.js">
-                      <i class="fab fa-node-js color-node"></i>
+                  <div class="tech-card magnetic glass-card" role="listitem" title="Node.js" aria-label="Node.js">
+                      <i class="fab fa-node-js color-node" aria-hidden="true"></i>
                   </div>
-                  <div class="tech-card magnetic glass-card" title="Git">
-                      <i class="fab fa-git-alt color-git"></i>
+                  <div class="tech-card magnetic glass-card" role="listitem" title="Git" aria-label="Git">
+                      <i class="fab fa-git-alt color-git" aria-hidden="true"></i>
                   </div>
-                  <div class="tech-card magnetic glass-card" title="SQL">
-                      <i class="fas fa-database color-sql"></i>
+                  <div class="tech-card magnetic glass-card" role="listitem" title="SQL / Databases" aria-label="SQL / Bases de données">
+                      <i class="fas fa-database color-sql" aria-hidden="true"></i>
                   </div>
               </div>
           </div>

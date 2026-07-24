@@ -5,7 +5,6 @@ import { TranslationService } from '../../services/translation.service';
   selector: 'app-hero',
   imports: [],
   templateUrl: './hero.html',
-  styleUrl: './hero.css',
 })
 /**
  * Composant Hero Section
