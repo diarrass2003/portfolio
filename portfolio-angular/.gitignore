@@ -42,3 +42,8 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# 3rd-party vendored assets (do NOT modify; ignored by linters)
+# These are kept in repo for offline use but excluded from static analysis
+# /public/Assets/fontawesome/
+# /public/Assets/js/browser@4.js
