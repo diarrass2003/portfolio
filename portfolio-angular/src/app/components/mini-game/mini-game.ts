@@ -34,14 +34,7 @@ const DIRECTIONS: Direction[] = [
   styleUrl: './mini-game.css',
 })
 export class MiniGame {
-  private readonly sourceWords = [
-    'JAVASCRIPT',
-    'PYTHON',
-    'JAVA',
-    'RUST',
-    'KOTLIN',
-    'SWIFT',
-  ];
+  private readonly sourceWords = ['JAVASCRIPT', 'PYTHON', 'JAVA', 'RUST', 'KOTLIN', 'SWIFT'];
 
   board = signal<BoardCell[][]>([]);
   words = signal<WordItem[]>([]);

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 export type Language = 'fr' | 'en';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 /**
  * Service Internationalisation (i18n)
@@ -14,12 +14,12 @@ export type Language = 'fr' | 'en';
 export class TranslationService {
   private http = inject(HttpClient);
 
-  // Signal réactif stockant la langue actuelle. 
+  // Signal réactif stockant la langue actuelle.
   currentLang = signal<Language>('fr');
 
   // Dictionnaire des traductions chargé
   private translations: any = {};
-  
+
   // État de chargement pour éviter le scintillement (optionnel)
   public isLoaded = signal<boolean>(false);
 
@@ -33,7 +33,7 @@ export class TranslationService {
         document.documentElement.lang = savedLang;
       }
     }
-    
+
     // Charger la langue initiale
     this.loadTranslations(this.currentLang());
   }
@@ -44,14 +44,14 @@ export class TranslationService {
    */
   setLanguage(lang: Language) {
     if (this.currentLang() === lang) return;
-    
+
     this.currentLang.set(lang);
     if (typeof window !== 'undefined') {
       localStorage.setItem('lang', lang);
       // Informe les lecteurs d'écran de la langue du contenu
       document.documentElement.lang = lang;
     }
-    
+
     this.loadTranslations(lang);
   }
 
@@ -68,9 +68,9 @@ export class TranslationService {
       error: (err) => {
         console.error(`Erreur de chargement des traductions pour ${lang}:`, err);
         // Fallback vide pour éviter les crashs si fichier non trouvé
-        this.translations[lang] = {}; 
+        this.translations[lang] = {};
         this.isLoaded.set(true);
-      }
+      },
     });
   }
 
@@ -80,7 +80,7 @@ export class TranslationService {
    */
   translate(key: string): string {
     const lang = this.currentLang();
-    
+
     // LECTURE DU SIGNAL OBLIGATOIRE POUR LE MODE ZONELESS
     // Cela indique à Angular de re-rendre la vue lorsque isLoaded passe à true (fin de la requête HTTP)
     this.isLoaded();
@@ -92,7 +92,7 @@ export class TranslationService {
 
     const keys = key.split('.');
     let result = this.translations[lang];
-    
+
     for (const k of keys) {
       if (result) {
         result = result[k];
@@ -100,8 +100,7 @@ export class TranslationService {
         return key;
       }
     }
-    
+
     return result || key;
   }
 }
-

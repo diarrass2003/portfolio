@@ -9,7 +9,7 @@ import { routeAnimations } from './animations';
   selector: 'app-root',
   imports: [RouterOutlet, Navbar, Footer],
   templateUrl: './app.html',
-  animations: [routeAnimations]
+  animations: [routeAnimations],
 })
 /**
  * Composant racine de l'application.
@@ -23,30 +23,34 @@ export class App implements AfterViewInit {
   get isCvPage(): boolean {
     return this.router.url.includes('/cv');
   }
-  
+
   // --- GESTION DU CURSEUR ET DU SCROLL ---
   private mx = 0; // Position X cible de la souris
   private my = 0; // Position Y cible de la souris
-  
+
   private cx = 0; // Position X actuelle du curseur fluide (interpolation)
   private cy = 0; // Position Y actuelle du curseur fluide (interpolation)
-  
+
   private animationFrameId: number | null = null; // ID de la boucle d'animation
   private isBrowser: boolean; // Flag pour éviter les erreurs de DOM sur le serveur (SSR)
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, @Inject(DOCUMENT) private document: Document, private router: Router) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(DOCUMENT) private document: Document,
+    private router: Router,
+  ) {
     // Vérifie si l'application s'exécute dans un navigateur web (évite les erreurs en cas de Server-Side Rendering)
     this.isBrowser = isPlatformBrowser(this.platformId);
-    
+
     // Réinitialise les observateurs d'animations à chaque changement de page
     // (Angular étant une SPA, les nouveaux éléments DOM du router-outlet doivent être scannés)
     if (this.isBrowser) {
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                // Petit délai pour laisser le temps au DOM de s'injecter
-                setTimeout(() => this.initObservers(), 150);
-            }
-        });
+      this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          // Petit délai pour laisser le temps au DOM de s'injecter
+          setTimeout(() => this.initObservers(), 150);
+        }
+      });
     }
   }
 
@@ -59,11 +63,11 @@ export class App implements AfterViewInit {
 
     // Indique que le JS est prêt pour activer certaines règles CSS
     this.document.body.classList.add('js-ready');
-    
+
     // --- GESTION DU CURSEUR PERSONNALISÉ ---
     const cur = this.document.getElementById('cursor');
     const dot = this.document.getElementById('cursorDot');
-    
+
     let isMagnetic = false;
     let magneticTarget: HTMLElement | null = null;
 
@@ -73,22 +77,28 @@ export class App implements AfterViewInit {
       let targetY = this.my;
 
       if (isMagnetic && magneticTarget) {
-          const rect = magneticTarget.getBoundingClientRect();
-          targetX = rect.left + rect.width / 2;
-          targetY = rect.top + rect.height / 2;
-          
-          // Apply magnetic pull
-          this.cx += (targetX - this.cx) * 0.2;
-          this.cy += (targetY - this.cy) * 0.2;
+        const rect = magneticTarget.getBoundingClientRect();
+        targetX = rect.left + rect.width / 2;
+        targetY = rect.top + rect.height / 2;
+
+        // Apply magnetic pull
+        this.cx += (targetX - this.cx) * 0.2;
+        this.cy += (targetY - this.cy) * 0.2;
       } else {
-          // Interpolation mathématique (Lerp) pour donner un effet de "retard" au curseur
-          this.cx += (targetX - this.cx) * 0.15;
-          this.cy += (targetY - this.cy) * 0.15;
+        // Interpolation mathématique (Lerp) pour donner un effet de "retard" au curseur
+        this.cx += (targetX - this.cx) * 0.15;
+        this.cy += (targetY - this.cy) * 0.15;
       }
 
-      if (cur) { cur.style.left = this.cx + 'px'; cur.style.top = this.cy + 'px'; }
-      if (dot) { dot.style.left = this.mx + 'px'; dot.style.top = this.my + 'px'; }
-      
+      if (cur) {
+        cur.style.left = this.cx + 'px';
+        cur.style.top = this.cy + 'px';
+      }
+      if (dot) {
+        dot.style.left = this.mx + 'px';
+        dot.style.top = this.my + 'px';
+      }
+
       this.animationFrameId = requestAnimationFrame(steps);
     };
 
@@ -101,27 +111,27 @@ export class App implements AfterViewInit {
      * Ajoute des classes CSS pour transformer le curseur (magnétisme, grossissement).
      */
     const setupInteractions = () => {
-        const hoverElements = this.document.querySelectorAll('a, button, .interactive, .magnetic');
-        hoverElements.forEach(el => {
-            const htmlEl = el as HTMLElement;
-            
-            htmlEl.addEventListener('mouseenter', () => {
-                cur?.classList.add('hovered');
-                // Active l'effet magnétique si l'élément possède la classe ou est un bouton
-                if (htmlEl.classList.contains('magnetic') || htmlEl.tagName === 'A' || htmlEl.tagName === 'BUTTON') {
-                    isMagnetic = true;
-                    magneticTarget = htmlEl;
-                    cur?.classList.add('magnetic-active');
-                }
-            });
-            
-            htmlEl.addEventListener('mouseleave', () => {
-                cur?.classList.remove('hovered');
-                isMagnetic = false;
-                magneticTarget = null;
-                cur?.classList.remove('magnetic-active');
-            });
+      const hoverElements = this.document.querySelectorAll('a, button, .interactive, .magnetic');
+      hoverElements.forEach((el) => {
+        const htmlEl = el as HTMLElement;
+
+        htmlEl.addEventListener('mouseenter', () => {
+          cur?.classList.add('hovered');
+          // Active l'effet magnétique si l'élément possède la classe ou est un bouton
+          if (htmlEl.classList.contains('magnetic') || htmlEl.tagName === 'A' || htmlEl.tagName === 'BUTTON') {
+            isMagnetic = true;
+            magneticTarget = htmlEl;
+            cur?.classList.add('magnetic-active');
+          }
         });
+
+        htmlEl.addEventListener('mouseleave', () => {
+          cur?.classList.remove('hovered');
+          isMagnetic = false;
+          magneticTarget = null;
+          cur?.classList.remove('magnetic-active');
+        });
+      });
     };
 
     setupInteractions();
@@ -141,50 +151,56 @@ export class App implements AfterViewInit {
    */
   private initObservers() {
     if (!this.isBrowser) return;
-    
-    // --- INTERSECTION OBSERVER : ANIMATIONS D'APPARITION (REVEAL) ---
-    const revealObs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('visible');
-                revealObs.unobserve(e.target);
-            }
-        });
-    }, { threshold: 0.05 });
 
-    this.document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight) {
-            el.classList.add('visible');
-        } else {
-            revealObs.observe(el);
-        }
+    // --- INTERSECTION OBSERVER : ANIMATIONS D'APPARITION (REVEAL) ---
+    const revealObs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            revealObs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.05 },
+    );
+
+    this.document.querySelectorAll('.reveal:not(.visible)').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('visible');
+      } else {
+        revealObs.observe(el);
+      }
     });
 
     // --- INTERSECTION OBSERVER : COMPTEURS DE STATISTIQUES ---
     const statsSection = this.document.querySelector('.hero-stats');
     if (statsSection && !statsSection.classList.contains('counted')) {
-        const statsObs = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                
-                entry.target.classList.add('counted');
-                entry.target.querySelectorAll('.stat-number').forEach(el => {
-                    const htmlEl = el as HTMLElement;
-                    const target = parseInt(htmlEl.dataset['target'] || '0', 10);
-                    let n = 0;
-                    const step = Math.max(1, Math.ceil(target / 40)); 
-                    
-                    const timer = setInterval(() => {
-                        n = Math.min(n + step, target);
-                        htmlEl.textContent = n + '+';
-                        if (n >= target) clearInterval(timer);
-                    }, 45);
-                });
-                statsObs.unobserve(entry.target);
+      const statsObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            entry.target.classList.add('counted');
+            entry.target.querySelectorAll('.stat-number').forEach((el) => {
+              const htmlEl = el as HTMLElement;
+              const target = parseInt(htmlEl.dataset['target'] || '0', 10);
+              let n = 0;
+              const step = Math.max(1, Math.ceil(target / 40));
+
+              const timer = setInterval(() => {
+                n = Math.min(n + step, target);
+                htmlEl.textContent = n + '+';
+                if (n >= target) clearInterval(timer);
+              }, 45);
             });
-        }, { threshold: 0.2 });
-        statsObs.observe(statsSection);
+            statsObs.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.2 },
+      );
+      statsObs.observe(statsSection);
     }
   }
 
@@ -195,8 +211,8 @@ export class App implements AfterViewInit {
   @HostListener('window:mousemove', ['$event'])
   onMouseMove(e: MouseEvent) {
     if (this.isBrowser) {
-        this.mx = e.clientX;
-        this.my = e.clientY;
+      this.mx = e.clientX;
+      this.my = e.clientY;
     }
   }
 
@@ -209,7 +225,7 @@ export class App implements AfterViewInit {
     if (!this.isBrowser) return;
     const indicator = this.document.getElementById('scrollIndicator');
     const total = this.document.body.scrollHeight - window.innerHeight;
-    
+
     if (indicator && total > 0) {
       // ratio compris entre 0 et 1 modifiant l'échelle horizontale CSS (transform: scaleX)
       indicator.style.transform = `scaleX(${window.scrollY / total})`;

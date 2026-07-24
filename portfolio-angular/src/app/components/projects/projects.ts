@@ -37,7 +37,7 @@ export class Projects implements AfterViewInit, OnDestroy {
       images: ['Assets/images/quicklodge_1.png', 'Assets/images/quicklodge_2.png'],
       tags: ['Angular', 'Java', 'PostgreSQL'],
       githubUrl: 'https://github.com/LeYASSOUNG/ShopAfrica',
-      demoUrl: '#'
+      demoUrl: '#',
     },
     {
       id: 'p2',
@@ -45,7 +45,7 @@ export class Projects implements AfterViewInit, OnDestroy {
       images: ['Assets/images/lumina_1.png', 'Assets/images/lumina_2.png'],
       tags: ['Next.js', 'Node.js', 'Spring Boot'],
       githubUrl: 'https://github.com/LeYASSOUNG/gestion-stock',
-      demoUrl: '#'
+      demoUrl: '#',
     },
     {
       id: 'p3',
@@ -53,14 +53,14 @@ export class Projects implements AfterViewInit, OnDestroy {
       images: ['Assets/images/midnight_1.png', 'Assets/images/midnight_2.png'],
       tags: ['Angular', 'UI/UX', 'PWA'],
       githubUrl: 'https://github.com/LeYASSOUNG/portfolio',
-      demoUrl: '#'
-    }
+      demoUrl: '#',
+    },
   ]);
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     public translation: TranslationService,
-    private github: GithubService
+    private github: GithubService,
   ) {}
 
   /**
@@ -102,10 +102,14 @@ export class Projects implements AfterViewInit, OnDestroy {
       if (!grid) return;
 
       let isTouching = false;
-      grid.addEventListener('touchstart', () => isTouching = true, { passive: true });
-      grid.addEventListener('touchend', () => {
-          setTimeout(() => isTouching = false, 3000); // Pause the auto-scroll for 3s after touch
-      }, { passive: true });
+      grid.addEventListener('touchstart', () => (isTouching = true), { passive: true });
+      grid.addEventListener(
+        'touchend',
+        () => {
+          setTimeout(() => (isTouching = false), 3000); // Pause the auto-scroll for 3s after touch
+        },
+        { passive: true },
+      );
 
       this.autoScrollInterval = setInterval(() => {
         if (isTouching) return;
@@ -137,7 +141,7 @@ export class Projects implements AfterViewInit, OnDestroy {
         nested: true, // Indique que le swiper est imbriqué (évite les conflits de swipe)
         touchReleaseOnEdges: true, // Permet de continuer le scroll de la page après la dernière image
         navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        pagination: { el: '.project-img-pagination', type: 'fraction' }
+        pagination: { el: '.project-img-pagination', type: 'fraction' },
       });
     }, 600);
   }

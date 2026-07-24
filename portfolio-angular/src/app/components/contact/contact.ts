@@ -7,7 +7,7 @@ import { TranslationService } from '../../services/translation.service';
   standalone: true,
   imports: [NgClass],
   templateUrl: './contact.html',
-  styleUrl: './contact.css'
+  styleUrl: './contact.css',
 })
 /**
  * Composant dédié à la section Contact.
@@ -27,29 +27,29 @@ export class Contact {
   async onSubmitContact(event: Event) {
     event.preventDefault(); // Annule le rechargement de page par défaut du formulaire
     this.isSubmitting = true;
-    
-    const form = event.target as HTMLFormElement;
-    
-    try {
-        // Exécute la requête HTTP POST avec FormData formaté en JSON
-        const res = await fetch('https://formspree.io/f/xdapoaww', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(new FormData(form)))
-        });
 
-        if (res.ok) {
-            this.formMessageClass = 'success';
-            this.formMessageText = '✅ ' + this.translation.translate('contact.success');
-            form.reset();
-        } else {
-            throw new Error('Server error');
-        }
+    const form = event.target as HTMLFormElement;
+
+    try {
+      // Exécute la requête HTTP POST avec FormData formaté en JSON
+      const res = await fetch('https://formspree.io/f/xdapoaww', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+
+      if (res.ok) {
+        this.formMessageClass = 'success';
+        this.formMessageText = '✅ ' + this.translation.translate('contact.success');
+        form.reset();
+      } else {
+        throw new Error('Server error');
+      }
     } catch {
-        this.formMessageClass = 'error';
-        this.formMessageText = '❌ ' + this.translation.translate('contact.error');
+      this.formMessageClass = 'error';
+      this.formMessageText = '❌ ' + this.translation.translate('contact.error');
     } finally {
-        this.isSubmitting = false; // Restaure l'état d'interaction du bouton d'envoi
+      this.isSubmitting = false; // Restaure l'état d'interaction du bouton d'envoi
     }
   }
 
@@ -60,11 +60,13 @@ export class Contact {
    */
   copyText(text: string, btnElement: HTMLElement) {
     navigator.clipboard.writeText(text).then(() => {
-        const orig = btnElement.innerHTML; // Sauvegarde l'icône originale
-        btnElement.innerHTML = '<i class="fas fa-check" style="color:#22c55e"></i>';
-        
-        // Restaure le bouton HTML à son état d'origine après 1,6 secondes
-        setTimeout(() => { btnElement.innerHTML = orig; }, 1600);
+      const orig = btnElement.innerHTML; // Sauvegarde l'icône originale
+      btnElement.innerHTML = '<i class="fas fa-check" style="color:#22c55e"></i>';
+
+      // Restaure le bouton HTML à son état d'origine après 1,6 secondes
+      setTimeout(() => {
+        btnElement.innerHTML = orig;
+      }, 1600);
     });
   }
 }

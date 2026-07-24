@@ -6,7 +6,7 @@ import { PwaInstallService } from '../../services/pwa-install.service';
 @Component({
   selector: 'app-navbar',
   imports: [CommonModule],
-  templateUrl: './navbar.html'
+  templateUrl: './navbar.html',
 })
 /**
  * Composant de la barre de navigation.
@@ -22,7 +22,7 @@ export class Navbar {
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: Object,
     public translation: TranslationService,
-    public pwaInstall: PwaInstallService
+    public pwaInstall: PwaInstallService,
   ) {
     // Restaure le thème sauvegardé, ou utilise la préférence système du navigateur
     if (isPlatformBrowser(this.platformId)) {
@@ -82,7 +82,7 @@ export class Navbar {
   onWindowScroll() {
     if (isPlatformBrowser(this.platformId)) {
       this.isScrolled = window.scrollY > 20;
-      
+
       const sections = ['home', 'about', 'skills', 'projects', 'game', 'contact'];
       for (const section of sections) {
         const element = this.document.getElementById(section);

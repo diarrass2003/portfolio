@@ -11,20 +11,20 @@
         <div class="swiper-slide" *ngFor="let item of testimonials">
           <div class="testimonial-card glass-card magnetic">
             <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-            
+
             <p class="testimonial-content">"{{ item.content }}"</p>
-            
+
             <div class="testimonial-footer">
               <div class="testimonial-info">
                 <div class="testimonial-avatar">
-                  <img [src]="item.avatar" alt="{{ item.name }}" title="{{ item.name }}">
+                  <img [src]="item.avatar" alt="{{ item.name }}" title="{{ item.name }}" />
                 </div>
                 <div class="testimonial-meta">
                   <h4 class="testimonial-name">{{ item.name }}</h4>
                   <p class="testimonial-role">{{ item.role }}</p>
                 </div>
               </div>
-              
+
               <div class="testimonial-rating">
                 <i class="fas fa-star" *ngFor="let star of getRatingArray(item.rating)"></i>
               </div>
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Pagination -->
       <div class="swiper-pagination"></div>
     </div>
