@@ -103,7 +103,7 @@ Puisque l'application utilise Angular, Node.js est prérequis.
 
 - **GitHub** : [LeYASSOUNG](https://github.com/LeYASSOUNG)
 - **LinkedIn** : [Yassoungo Youssouf Diarrassouba](https://www.linkedin.com/in/yassoungo-youssouf-diarrassouba-0b7037306)
-- **Twitter** : [@YassoungoD](https://x.com/YassoungoD)
+- **Twitter** : [@YassoungoD](https://x.com/Yassoungo01)
 - **Instagram** : [@diarr_assoubayassoungo](https://www.instagram.com/diarr_assoubayassoungo)
 
 ## 📄 Licence
