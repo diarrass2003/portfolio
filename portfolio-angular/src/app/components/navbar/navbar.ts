@@ -1,13 +1,12 @@
 import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser, CommonModule } from '@angular/common';
 import { TranslationService } from '../../services/translation.service';
 import { PwaInstallService } from '../../services/pwa-install.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [],
-  templateUrl: './navbar.html',
-  styleUrl: './navbar.css'
+  imports: [CommonModule],
+  templateUrl: './navbar.html'
 })
 /**
  * Composant de la barre de navigation.

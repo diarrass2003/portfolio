@@ -1,79 +1,95 @@
 <!-- Pied de page (Footer) : Liens de navigation, services, réseaux sociaux et newsletter -->
-<footer class="footer-section">
-  <div class="footer-inner glass-card">
-      <div class="footer-grid">
-          <div class="footer-brand-area">
-              <span class="brand-text">Diarrassouba</span>
-              <p class="brand-subtext">{{ translation.translate('footer.brand_desc') }}</p>
-              <div class="footer-socials">
-                  <a href="https://github.com/LeYASSOUNG" class="social-icon magnetic" target="_blank" rel="noopener noreferrer" title="Lien vers GitHub">
-                      <i class="fab fa-github"></i>
-                  </a>
-                  <a href="https://www.linkedin.com/in/yassoungo-youssouf-diarrassouba-0b7037306" class="social-icon magnetic" target="_blank" rel="noopener noreferrer" title="Lien vers LinkedIn">
-                      <i class="fab fa-linkedin-in"></i>
-                  </a>
-                  <a href="https://x.com/YassoungoD" class="social-icon magnetic" target="_blank" rel="noopener noreferrer" title="Lien vers Twitter">
-                      <i class="fab fa-twitter"></i>
-                  </a>
-                  <a href="https://www.instagram.com/diarr_assoubayassoungo" class="social-icon magnetic" target="_blank" rel="noopener noreferrer" title="Lien vers Instagram">
-                      <i class="fab fa-instagram"></i>
-                  </a>
-              </div>
-          </div>
+<footer class="footer-section" aria-label="Pied de page">
+    <div class="footer-inner glass-card">
+        <div class="footer-grid">
+            <div class="footer-brand-area">
+                <span class="brand-text">Diarrassouba</span>
+                <p class="brand-subtext">{{ translation.translate('footer.brand_desc') }}</p>
+                <div class="footer-socials" aria-label="Réseaux sociaux">
+                    <a href="https://github.com/LeYASSOUNG" class="social-icon magnetic" target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Profil GitHub de Diarrassouba Yassoungo (nouvelle fenêtre)">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/yassoungo-youssouf-diarrassouba-0b7037306"
+                        class="social-icon magnetic" target="_blank" rel="noopener noreferrer"
+                        aria-label="Profil LinkedIn de Diarrassouba Yassoungo (nouvelle fenêtre)">
+                        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://x.com/Yassoungo01" class="social-icon magnetic" target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Profil X/Twitter de Diarrassouba Yassoungo (nouvelle fenêtre)">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.instagram.com/diarr_assoubayassoungo" class="social-icon magnetic"
+                        target="_blank" rel="noopener noreferrer"
+                        aria-label="Profil Instagram de Diarrassouba Yassoungo (nouvelle fenêtre)">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
 
-          <!-- Grille de navigation du pied de page (Liens rapides et Newsletter) -->
-          <div class="footer-nav-grid">
-              <div class="footer-col">
-                  <h4>{{ translation.translate('footer.nav_title') }}</h4>
-                  <ul class="footer-list">
-                      <li><a href="#home" class="footer-link">{{ translation.translate('nav.home') }}</a></li>
-                      <li><a href="#about" class="footer-link">{{ translation.translate('nav.about') }}</a></li>
-                      <li><a href="#skills" class="footer-link">{{ translation.translate('nav.skills') }}</a></li>
-                      <li><a href="#projects" class="footer-link">{{ translation.translate('nav.projects') }}</a></li>
-                      <li><a href="#game" class="footer-link">{{ translation.translate('nav.game') }}</a></li>
-                      <li><a [routerLink]="['/cv']" class="footer-link">{{ translation.translate('nav.cv') }}</a></li>
-                  </ul>
-              </div>
-              <div class="footer-col">
-                  <h4>Services</h4>
-                  <ul class="footer-list">
-                      <li class="footer-item">Web Architecture</li>
-                      <li class="footer-item">Interactive Design</li>
-                      <li class="footer-item">Cloud Solutions</li>
-                      <li class="footer-item">Performance Audit</li>
-                  </ul>
-              </div>
-              <div class="footer-col">
-              <h4>{{ translation.translate('footer.newsletter_title') }}</h4>
-                  <p class="newsletter-text">{{ translation.translate('footer.newsletter_desc') }}</p>
-                  <form class="premium-newsletter" (submit)="onNewsletterSubmit($event)">
-                      <div class="newsletter-input-wrap">
-                          <label for="newsletter-email" class="sr-only">Newsletter Email</label>
-                          <input type="email" id="newsletter-email" 
-                                 placeholder="Email" [placeholder]="translation.translate('footer.subscribe')" 
-                                 title="Email" [title]="translation.translate('footer.subscribe')"
-                                 [aria-label]="translation.translate('footer.subscribe')"
-                                 class="glass-input newsletter-input" required>
-                          <button type="submit" class="newsletter-submit magnetic" 
-                                  title="Subscribe" [title]="translation.translate('footer.subscribe')"
-                                  [aria-label]="translation.translate('footer.subscribe')">
-                              <i class="fas fa-paper-plane"></i>
-                          </button>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
+            <!-- Grille de navigation du pied de page (Liens rapides et Newsletter) -->
+            <div class="footer-nav-grid">
+                <div class="footer-col">
+                    <nav aria-label="Liens rapides du pied de page">
+                        <h4 id="footer-nav-title">{{ translation.translate('footer.nav_title') }}</h4>
+                        <ul class="footer-list" aria-labelledby="footer-nav-title">
+                            <li><a href="#home" class="footer-link">{{ translation.translate('nav.home') }}</a></li>
+                            <li><a href="#about" class="footer-link">{{ translation.translate('nav.about') }}</a></li>
+                            <li><a href="#skills" class="footer-link">{{ translation.translate('nav.skills') }}</a></li>
+                            <li><a href="#projects" class="footer-link">{{ translation.translate('nav.projects') }}</a>
+                            </li>
+                            <li><a href="#game" class="footer-link">{{ translation.translate('nav.game') }}</a></li>
+                            <li><a [routerLink]="['/cv']" class="footer-link">{{ translation.translate('nav.cv') }}</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer-col">
+                    <h4 id="footer-services-title">Services</h4>
+                    <ul class="footer-list" aria-labelledby="footer-services-title">
+                        <li class="footer-item">Web Architecture</li>
+                        <li class="footer-item">Interactive Design</li>
+                        <li class="footer-item">Cloud Solutions</li>
+                        <li class="footer-item">Performance Audit</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 id="footer-newsletter-title">{{ translation.translate('footer.newsletter_title') }}</h4>
+                    <p class="newsletter-text">{{ translation.translate('footer.newsletter_desc') }}</p>
+                    <form class="premium-newsletter" (submit)="onNewsletterSubmit($event)"
+                        aria-labelledby="footer-newsletter-title">
+                        <div class="newsletter-input-wrap">
+                            <label for="newsletter-email" class="sr-only">
+                                {{ translation.translate('footer.newsletter_title') }} — Email
+                            </label>
+                            <input type="email" id="newsletter-email" placeholder="Email"
+                                [placeholder]="translation.translate('footer.subscribe')"
+                                [attr.aria-label]="translation.translate('footer.subscribe')" autocomplete="email"
+                                class="glass-input newsletter-input" required>
+                            <button type="submit" class="newsletter-submit magnetic"
+                                title="{{ translation.translate('footer.subscribe') }}"
+                                aria-label="{{ translation.translate('footer.subscribe') }}">
+                                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-      <div class="footer-bottom">
-          <p class="copyright">&copy; {{ 2026 }} Diarrassouba. {{ translation.translate('footer.rights') }}</p>
-      </div>
-  </div>
+        <div class="footer-bottom">
+            <p class="copyright">
+                &copy; {{ 2026 }} Diarrassouba. {{ translation.translate('footer.rights') }}
+            </p>
+        </div>
+    </div>
 </footer>
 
 <!-- Bouton magnétique de retour en haut de page (Back to Top) -->
-<button id="backToTop" class="back-to-top magnetic" [class.visible]="showBackToTop" (click)="scrollToTop()" 
-        title="Scroll to top" [title]="translation.translate('footer.scroll_top')" 
-        [aria-label]="translation.translate('footer.scroll_top')">
-  <i class="fas fa-arrow-up"></i>
+<button id="backToTop" class="back-to-top magnetic" [class.visible]="showBackToTop" (click)="scrollToTop()"
+    title="{{ translation.translate('footer.scroll_top') }}"
+    aria-label="{{ translation.translate('footer.scroll_top') }}" [attr.aria-hidden]="!showBackToTop">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
 </button>

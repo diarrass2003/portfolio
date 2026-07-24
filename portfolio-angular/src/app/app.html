@@ -2,7 +2,7 @@
     <app-navbar></app-navbar>
 }
 
-<main [@routeAnimations]="prepareRoute(outlet)">
+<main id="main-content" tabindex="-1" [@routeAnimations]="prepareRoute(outlet)">
     <router-outlet #outlet="outlet"></router-outlet>
 </main>
 
