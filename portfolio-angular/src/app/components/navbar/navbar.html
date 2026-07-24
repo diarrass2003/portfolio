@@ -159,7 +159,9 @@
             (click)="toggleLanguage()"
             [attr.aria-label]="translation.currentLang() === 'fr' ? 'Switch to English' : 'Passer en Français'"
           >
-            <span class="lang-flag" aria-hidden="true">{{ translation.currentLang() === 'fr' ? '🇫🇷' : '🇬🇧' }}</span>
+            <span class="lang-flag" aria-hidden="true">{{
+              translation.currentLang() === 'fr' ? '🇫🇷' : '🇬🇧'
+            }}</span>
             <span>{{ translation.currentLang() === 'fr' ? 'Français' : 'English' }}</span>
           </button>
 
