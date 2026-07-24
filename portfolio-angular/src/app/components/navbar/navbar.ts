@@ -10,7 +10,8 @@ import { PwaInstallService } from '../../services/pwa-install.service';
 })
 /**
  * Composant de la barre de navigation.
- * Il assure le routage intra-page, le basculement mobile (Hamburger) et gère la préférence utilisateur pour le mode sombre.
+ * Il assure le routage intra-page, le basculement mobile (Hamburger)
+ * et gère la préférence utilisateur pour le mode sombre.
  */
 export class Navbar {
   activeSection = 'home';

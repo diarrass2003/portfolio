@@ -17,7 +17,8 @@ export class TestimonialsComponent implements AfterViewInit {
       name: 'Alexandre Rivière',
       role: 'CEO @ TechFlow',
       content:
-        'Diarrassouba a transformé notre vision technique en une réalité performante. Son expertise Full Stack et son sens du détail UI/UX sont exceptionnels.',
+        'Diarrassouba a transformé notre vision technique en une réalité performante.' +
+        ' Son expertise Full Stack et son sens du détail UI/UX sont exceptionnels.',
       avatar: 'https://i.pravatar.cc/150?u=alex',
       rating: 5,
     },
@@ -25,7 +26,8 @@ export class TestimonialsComponent implements AfterViewInit {
       name: 'Sophie Martinet',
       role: 'Product Manager @ NovaSoft',
       content:
-        "Une collaboration fluide et des résultats au-delà de nos attentes. La qualité du code et la rapidité d'exécution font de lui un partenaire de choix.",
+        "Une collaboration fluide et des résultats au-delà de nos attentes." +
+        " La qualité du code et la rapidité d'exécution font de lui un partenaire de choix.",
       avatar: 'https://i.pravatar.cc/150?u=sophie',
       rating: 5,
     },
@@ -33,7 +35,8 @@ export class TestimonialsComponent implements AfterViewInit {
       name: 'Marc Lefebvre',
       role: 'Directeur Technique @ InovLab',
       content:
-        'Excellent développeur, très autonome et force de proposition. Il maîtrise parfaitement les architectures modernes et sait résoudre les problèmes complexes.',
+        'Excellent développeur, très autonome et force de proposition.' +
+        ' Il maîtrise parfaitement les architectures modernes et sait résoudre les problèmes complexes.',
       avatar: 'https://i.pravatar.cc/150?u=marc',
       rating: 5,
     },

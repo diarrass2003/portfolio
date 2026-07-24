@@ -1,4 +1,4 @@
-﻿import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { TranslationService } from '../../services/translation.service';
 
 type Direction = { r: number; c: number };
@@ -149,35 +149,24 @@ export class MiniGame {
   }
 
   private generateBoard(): { board: BoardCell[][]; words: string[] } {
-    const board: string[][] = Array.from({ length: SIZE }, () => Array.from({ length: SIZE }, () => ''));
+    const board: string[][] = Array.from({ length: SIZE }, () =>
+      Array.from({ length: SIZE }, () => '')
+    );
     const words = [...this.sourceWords].sort(() => Math.random() - 0.5);
 
     for (const word of words) {
-      let placed = false;
-
-      for (let tries = 0; tries < 180 && !placed; tries++) {
-        const dir = DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)];
-        const row = Math.floor(Math.random() * SIZE);
-        const col = Math.floor(Math.random() * SIZE);
-
-        if (this.canPlaceWord(board, word, row, col, dir)) {
-          this.placeWord(board, word, row, col, dir);
-          placed = true;
-        }
-      }
-
-      if (!placed) {
-        for (let r = 0; r < SIZE && !placed; r++) {
-          for (let c = 0; c <= SIZE - word.length && !placed; c++) {
-            if (this.canPlaceWord(board, word, r, c, { r: 0, c: 1 })) {
-              this.placeWord(board, word, r, c, { r: 0, c: 1 });
-              placed = true;
-            }
-          }
-        }
-      }
+      this.tryPlaceWord(board, word);
     }
 
+    this.fillRandomLetters(board);
+
+    return {
+      words,
+      board: board.map((row) => row.map((letter) => ({ letter, selected: false, found: false }))),
+    };
+  }
+
+  private fillRandomLetters(board: string[][]): void {
     for (let r = 0; r < SIZE; r++) {
       for (let c = 0; c < SIZE; c++) {
         if (!board[r][c]) {
@@ -185,11 +174,6 @@ export class MiniGame {
         }
       }
     }
-
-    return {
-      words,
-      board: board.map((row) => row.map((letter) => ({ letter, selected: false, found: false }))),
-    };
   }
 
   private tryPlaceWord(board: string[][], word: string): void {

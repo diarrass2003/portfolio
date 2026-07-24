@@ -1,0 +1,6 @@
+# Fichiers tiers / vendeurs – exclus de l'analyse Herald
+# Ces fichiers sont des dépendances externes non modifiables.
+
+portfolio-angular/public/Assets/fontawesome/**
+portfolio-angular/public/Assets/js/browser@4.js
+portfolio-angular/public/Assets/fonts/css2.css
