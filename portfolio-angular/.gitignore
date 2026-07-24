@@ -43,7 +43,10 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-# 3rd-party vendored assets (do NOT modify; ignored by linters)
-# These are kept in repo for offline use but excluded from static analysis
-# /public/Assets/fontawesome/
-# /public/Assets/js/browser@4.js
+
+# 3rd-party vendored assets – linter warnings only; not used by the Angular build
+/public/Assets/fontawesome/fontawesome-free-6.7.2-web/js/
+/public/Assets/fontawesome/fontawesome-free-6.7.2-web/less/
+/public/Assets/fontawesome/fontawesome-free-6.7.2-web/scss/
+/public/Assets/js/browser@4.js
+/public/Assets/fonts/css2.css
