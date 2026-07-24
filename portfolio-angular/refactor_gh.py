@@ -40,7 +40,9 @@ new_class_content = """export class GithubService {
     }
   }
 
-  private async handleResponse(response: Response, repoPath: string, cacheKey: string, fallback: RepoStats): Promise<RepoStats> {
+  private async handleResponse(
+      response: Response, repoPath: string, cacheKey: string, fallback: RepoStats
+  ): Promise<RepoStats> {
     if (response.status === 404) {
       console.warn(`GitHub repository '${repoPath}' not found.`);
       return { stars: 0, forks: 0 };

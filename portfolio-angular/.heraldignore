@@ -4,3 +4,4 @@ public/Assets/fonts/
 public/Assets/css/
 node_modules/
 dist/
+public/Assets/**
