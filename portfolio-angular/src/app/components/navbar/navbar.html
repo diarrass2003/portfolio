@@ -1,130 +1,197 @@
 <!-- Barre de navigation (Navbar) globale : Liens d'ancrage, actions (thème, langue) et menu mobile -->
 <nav class="navbar" [class.scrolled]="isScrolled" aria-label="Navigation principale">
   <div class="navbar-inner">
-      <a href="#home" class="navbar-brand magnetic" (click)="setActive('home')" aria-label="Accueil — Diarrassouba">
-          <span class="brand-text">Diarrassouba</span>
+    <a href="#home" class="navbar-brand magnetic" (click)="setActive('home')" aria-label="Accueil — Diarrassouba">
+      <span class="brand-text">Diarrassouba</span>
+    </a>
+
+    <!-- Liens de navigation centraux (Visibles sur Desktop) -->
+    <div class="navbar-links">
+      <a
+        href="#home"
+        class="nav-link"
+        [class.active]="activeSection === 'home'"
+        (click)="setActive('home')"
+        [attr.aria-current]="activeSection === 'home' ? 'page' : null"
+      >
+        <i class="fas fa-home-alt nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.home') }}
+      </a>
+      <a
+        href="#about"
+        class="nav-link"
+        [class.active]="activeSection === 'about'"
+        (click)="setActive('about')"
+        [attr.aria-current]="activeSection === 'about' ? 'page' : null"
+      >
+        <i class="fas fa-user nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.about') }}
+      </a>
+      <a
+        href="#skills"
+        class="nav-link"
+        [class.active]="activeSection === 'skills'"
+        (click)="setActive('skills')"
+        [attr.aria-current]="activeSection === 'skills' ? 'page' : null"
+      >
+        <i class="fas fa-code nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.skills') }}
+      </a>
+      <a
+        href="#projects"
+        class="nav-link"
+        [class.active]="activeSection === 'projects'"
+        (click)="setActive('projects')"
+        [attr.aria-current]="activeSection === 'projects' ? 'page' : null"
+      >
+        <i class="fas fa-project-diagram nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.projects') }}
+      </a>
+      <a
+        href="#game"
+        class="nav-link"
+        [class.active]="activeSection === 'game'"
+        (click)="setActive('game')"
+        [attr.aria-current]="activeSection === 'game' ? 'page' : null"
+      >
+        <i class="fas fa-puzzle-piece nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.game') }}
+      </a>
+      <a
+        href="#contact"
+        class="nav-link"
+        [class.active]="activeSection === 'contact'"
+        (click)="setActive('contact')"
+        [attr.aria-current]="activeSection === 'contact' ? 'page' : null"
+      >
+        <i class="fas fa-envelope nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.contact') }}
       </a>
 
-      <!-- Liens de navigation centraux (Visibles sur Desktop) -->
-      <div class="navbar-links">
-          <a href="#home" class="nav-link" [class.active]="activeSection === 'home'" (click)="setActive('home')"
-             [attr.aria-current]="activeSection === 'home' ? 'page' : null">
-            <i class="fas fa-home-alt nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.home') }}
-          </a>
-          <a href="#about" class="nav-link" [class.active]="activeSection === 'about'" (click)="setActive('about')"
-             [attr.aria-current]="activeSection === 'about' ? 'page' : null">
-            <i class="fas fa-user nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.about') }}
-          </a>
-          <a href="#skills" class="nav-link" [class.active]="activeSection === 'skills'" (click)="setActive('skills')"
-             [attr.aria-current]="activeSection === 'skills' ? 'page' : null">
-            <i class="fas fa-code nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.skills') }}
-          </a>
-          <a href="#projects" class="nav-link" [class.active]="activeSection === 'projects'" (click)="setActive('projects')"
-             [attr.aria-current]="activeSection === 'projects' ? 'page' : null">
-            <i class="fas fa-project-diagram nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.projects') }}
-          </a>
-          <a href="#game" class="nav-link" [class.active]="activeSection === 'game'" (click)="setActive('game')"
-             [attr.aria-current]="activeSection === 'game' ? 'page' : null">
-            <i class="fas fa-puzzle-piece nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.game') }}
-          </a>
-          <a href="#contact" class="nav-link" [class.active]="activeSection === 'contact'" (click)="setActive('contact')"
-             [attr.aria-current]="activeSection === 'contact' ? 'page' : null">
-            <i class="fas fa-envelope nav-icon" aria-hidden="true"></i> {{ translation.translate('nav.contact') }}
-          </a>
-          
-          <!-- Boutons d'actions rapides (Langue, Installation PWA, Thème Sombre/Clair) -->
-          <div class="nav-actions">
-            <button class="lang-toggle interactive" (click)="$event.stopPropagation(); toggleLanguage()" 
-                    title="{{ translation.currentLang() === 'fr' ? 'Switch to English' : 'Passer en Français' }}"
-                    aria-label="{{ translation.currentLang() === 'fr' ? 'Switch to English' : 'Passer en Français' }}">
-              <span class="lang-text" aria-hidden="true">{{ translation.currentLang() === 'fr' ? 'FR' : 'EN' }}</span>
-            </button>
+      <!-- Boutons d'actions rapides (Langue, Installation PWA, Thème Sombre/Clair) -->
+      <div class="nav-actions">
+        <button
+          class="lang-toggle interactive"
+          (click)="$event.stopPropagation(); toggleLanguage()"
+          title="{{ translation.currentLang() === 'fr' ? 'Switch to English' : 'Passer en Français' }}"
+          aria-label="{{ translation.currentLang() === 'fr' ? 'Switch to English' : 'Passer en Français' }}"
+        >
+          <span class="lang-text" aria-hidden="true">{{ translation.currentLang() === 'fr' ? 'FR' : 'EN' }}</span>
+        </button>
 
-            @if (pwaInstall.canInstall()) {
-              <button class="install-btn magnetic" (click)="pwaInstall.install()" 
-                      [attr.aria-label]="translation.translate('pwa.install')">
-                <i class="fas fa-download" aria-hidden="true"></i>
-                <span class="sr-only">{{ translation.translate('pwa.install') }}</span>
-              </button>
-            }
+        @if (pwaInstall.canInstall()) {
+          <button
+            class="install-btn magnetic"
+            (click)="pwaInstall.install()"
+            [attr.aria-label]="translation.translate('pwa.install')"
+          >
+            <i class="fas fa-download" aria-hidden="true"></i>
+            <span class="sr-only">{{ translation.translate('pwa.install') }}</span>
+          </button>
+        }
 
-            <button class="dark-toggle magnetic" (click)="toggleTheme()" 
-                    [attr.aria-label]="isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'">
-                <i class="fas" [class.fa-sun]="isDarkTheme" [class.fa-moon]="!isDarkTheme" aria-hidden="true"></i>
-                <span class="sr-only">{{ isDarkTheme ? 'Mode clair' : 'Mode sombre' }}</span>
-            </button>
-          </div>
+        <button
+          class="dark-toggle magnetic"
+          (click)="toggleTheme()"
+          [attr.aria-label]="isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'"
+        >
+          <i class="fas" [class.fa-sun]="isDarkTheme" [class.fa-moon]="!isDarkTheme" aria-hidden="true"></i>
+          <span class="sr-only">{{ isDarkTheme ? 'Mode clair' : 'Mode sombre' }}</span>
+        </button>
       </div>
+    </div>
 
-      <!-- Bouton Hamburger : aria-expanded indique l'état ouvert/fermé au lecteur d'écran -->
-      <button class="hamburger magnetic" [class.open]="isMenuOpen" (click)="toggleMenu()"
-              title="{{ isMenuOpen ? 'Fermer' : 'Menu' }}"
-              [attr.aria-expanded]="isMenuOpen"
-              aria-controls="mobile-overlay"
-              aria-label="{{ isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu de navigation' }}">
-          <div class="hamburger-box" aria-hidden="true">
-              <div class="hamburger-inner"></div> 
-          </div>
-      </button>
+    <!-- Bouton Hamburger : aria-expanded indique l'état ouvert/fermé au lecteur d'écran -->
+    <button
+      class="hamburger magnetic"
+      [class.open]="isMenuOpen"
+      (click)="toggleMenu()"
+      title="{{ isMenuOpen ? 'Fermer' : 'Menu' }}"
+      [attr.aria-expanded]="isMenuOpen"
+      aria-controls="mobile-overlay"
+      aria-label="{{ isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu de navigation' }}"
+    >
+      <div class="hamburger-box" aria-hidden="true">
+        <div class="hamburger-inner"></div>
+      </div>
+    </button>
   </div>
 
   <!-- Menu Mobile Plein Écran (Overlay) — role=dialog annonce la modale aux lecteurs d'écran -->
-  <div id="mobile-overlay" class="mobile-overlay glass-card" [class.open]="isMenuOpen"
-       role="dialog" aria-modal="true"
-       [attr.aria-label]="translation.currentLang() === 'fr' ? 'Menu de navigation' : 'Navigation menu'"
-       [attr.aria-hidden]="!isMenuOpen">
-      <button class="close-menu" (click)="closeMenu()" 
-              title="Fermer"
-              aria-label="{{ translation.currentLang() === 'fr' ? 'Fermer le menu' : 'Close menu' }}">
-        <i class="fas fa-times" aria-hidden="true"></i>
-      </button>
-      
-      <div class="mobile-menu-inner">
-          <div class="mobile-links">
-              <a href="#home" class="mobile-link" (click)="setActive('home')">
-                <i class="fas fa-home-alt" aria-hidden="true"></i> {{ translation.translate('nav.home') }}
-              </a>
-              <a href="#about" class="mobile-link" (click)="setActive('about')">
-                <i class="fas fa-user" aria-hidden="true"></i> {{ translation.translate('nav.about') }}
-              </a>
-              <a href="#skills" class="mobile-link" (click)="setActive('skills')">
-                <i class="fas fa-code" aria-hidden="true"></i> {{ translation.translate('nav.skills') }}
-              </a>
-              <a href="#projects" class="mobile-link" (click)="setActive('projects')">
-                <i class="fas fa-project-diagram" aria-hidden="true"></i> {{ translation.translate('nav.projects') }}
-              </a>
-              <a href="#game" class="mobile-link" (click)="setActive('game')">
-                <i class="fas fa-puzzle-piece" aria-hidden="true"></i> {{ translation.translate('nav.game') }}
-              </a>
-              <a href="#contact" class="mobile-link" (click)="setActive('contact')">
-                <i class="fas fa-envelope" aria-hidden="true"></i> {{ translation.translate('nav.contact') }}
-              </a>
-          </div>
-          
-          <div class="mobile-footer">
-              <div class="mobile-actions-grid">
-                <button class="mobile-action-btn lang-btn" (click)="toggleLanguage()"
-                        [attr.aria-label]="translation.currentLang() === 'fr' ? 'Switch to English' : 'Passer en Français'">
-                  <span class="lang-flag" aria-hidden="true">{{ translation.currentLang() === 'fr' ? '🇫🇷' : '🇬🇧' }}</span>
-                  <span>{{ translation.currentLang() === 'fr' ? 'Français' : 'English' }}</span>
-                </button>
+  <div
+    id="mobile-overlay"
+    class="mobile-overlay glass-card"
+    [class.open]="isMenuOpen"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="translation.currentLang() === 'fr' ? 'Menu de navigation' : 'Navigation menu'"
+    [attr.aria-hidden]="!isMenuOpen"
+  >
+    <button
+      class="close-menu"
+      (click)="closeMenu()"
+      title="Fermer"
+      aria-label="{{ translation.currentLang() === 'fr' ? 'Fermer le menu' : 'Close menu' }}"
+    >
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
 
-                <button class="mobile-action-btn theme-btn" (click)="toggleTheme()"
-                        [attr.aria-label]="isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'">
-                    <i class="fas" [class.fa-sun]="isDarkTheme" [class.fa-moon]="!isDarkTheme" aria-hidden="true"></i>
-                    <span>{{ isDarkTheme ? (translation.currentLang() === 'fr' ? 'Mode Clair' : 'Light Mode') : (translation.currentLang() === 'fr' ? 'Mode Sombre' : 'Dark Mode') }}</span>
-                </button>
-
-                @if (pwaInstall.canInstall()) {
-                  <button class="mobile-action-btn install-pwa-btn" (click)="pwaInstall.install()"
-                          [attr.aria-label]="translation.translate('pwa.install')">
-                    <i class="fas fa-download" aria-hidden="true"></i>
-                    <span>{{ translation.translate('pwa.install') }}</span>
-                  </button>
-                }
-              </div>
-          </div>
+    <div class="mobile-menu-inner">
+      <div class="mobile-links">
+        <a href="#home" class="mobile-link" (click)="setActive('home')">
+          <i class="fas fa-home-alt" aria-hidden="true"></i> {{ translation.translate('nav.home') }}
+        </a>
+        <a href="#about" class="mobile-link" (click)="setActive('about')">
+          <i class="fas fa-user" aria-hidden="true"></i> {{ translation.translate('nav.about') }}
+        </a>
+        <a href="#skills" class="mobile-link" (click)="setActive('skills')">
+          <i class="fas fa-code" aria-hidden="true"></i> {{ translation.translate('nav.skills') }}
+        </a>
+        <a href="#projects" class="mobile-link" (click)="setActive('projects')">
+          <i class="fas fa-project-diagram" aria-hidden="true"></i> {{ translation.translate('nav.projects') }}
+        </a>
+        <a href="#game" class="mobile-link" (click)="setActive('game')">
+          <i class="fas fa-puzzle-piece" aria-hidden="true"></i> {{ translation.translate('nav.game') }}
+        </a>
+        <a href="#contact" class="mobile-link" (click)="setActive('contact')">
+          <i class="fas fa-envelope" aria-hidden="true"></i> {{ translation.translate('nav.contact') }}
+        </a>
       </div>
+
+      <div class="mobile-footer">
+        <div class="mobile-actions-grid">
+          <button
+            class="mobile-action-btn lang-btn"
+            (click)="toggleLanguage()"
+            [attr.aria-label]="translation.currentLang() === 'fr' ? 'Switch to English' : 'Passer en Français'"
+          >
+            <span class="lang-flag" aria-hidden="true">{{ translation.currentLang() === 'fr' ? '🇫🇷' : '🇬🇧' }}</span>
+            <span>{{ translation.currentLang() === 'fr' ? 'Français' : 'English' }}</span>
+          </button>
+
+          <button
+            class="mobile-action-btn theme-btn"
+            (click)="toggleTheme()"
+            [attr.aria-label]="isDarkTheme ? 'Activer le mode clair' : 'Activer le mode sombre'"
+          >
+            <i class="fas" [class.fa-sun]="isDarkTheme" [class.fa-moon]="!isDarkTheme" aria-hidden="true"></i>
+            <span>{{
+              isDarkTheme
+                ? translation.currentLang() === 'fr'
+                  ? 'Mode Clair'
+                  : 'Light Mode'
+                : translation.currentLang() === 'fr'
+                  ? 'Mode Sombre'
+                  : 'Dark Mode'
+            }}</span>
+          </button>
+
+          @if (pwaInstall.canInstall()) {
+            <button
+              class="mobile-action-btn install-pwa-btn"
+              (click)="pwaInstall.install()"
+              [attr.aria-label]="translation.translate('pwa.install')"
+            >
+              <i class="fas fa-download" aria-hidden="true"></i>
+              <span>{{ translation.translate('pwa.install') }}</span>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
-

@@ -8,7 +8,7 @@ import { TranslationService } from '../../services/translation.service';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './footer.html',
-  styleUrl: './footer.css'
+  styleUrl: './footer.css',
 })
 /**
  * Composant de pied de page.
@@ -18,7 +18,10 @@ export class Footer {
   newsletterStatus: 'idle' | 'loading' | 'success' | 'error' = 'idle';
   showBackToTop = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, public translation: TranslationService) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    public translation: TranslationService,
+  ) {}
 
   /**
    * Envoi du formulaire de newsletter de façon asynchrone (via Formspree).
@@ -34,36 +37,36 @@ export class Footer {
     this.newsletterStatus = 'loading';
 
     try {
-        const res = await fetch('https://formspree.io/f/xdapoaww', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ email: email, subject: 'Inscription Newsletter' })
-        });
+      const res = await fetch('https://formspree.io/f/xdapoaww', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email: email, subject: 'Inscription Newsletter' }),
+      });
 
-        if (res.ok) {
-            input.value = '';
-            this.newsletterStatus = 'success';
-        } else {
-            throw new Error('Error');
-        }
+      if (res.ok) {
+        input.value = '';
+        this.newsletterStatus = 'success';
+      } else {
+        throw new Error('Error');
+      }
     } catch {
-        this.newsletterStatus = 'error';
-        setTimeout(() => {
-            this.newsletterStatus = 'idle';
-        }, 3000);
+      this.newsletterStatus = 'error';
+      setTimeout(() => {
+        this.newsletterStatus = 'idle';
+      }, 3000);
     }
   }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     if (isPlatformBrowser(this.platformId)) {
-        this.showBackToTop = window.scrollY > 500;
+      this.showBackToTop = window.scrollY > 500;
     }
   }
 
   scrollToTop() {
     if (isPlatformBrowser(this.platformId)) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 }

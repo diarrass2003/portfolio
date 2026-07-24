@@ -7,5 +7,4 @@ import { App } from './app/app';
  * Dans une architecture "Standalone", nous amorçons directement le composant racine `App`
  * sans passer par un AppModule.
  */
-bootstrapApplication(App, appConfig)
-  .catch((err: any) => console.error(err));
+bootstrapApplication(App, appConfig).catch((err: any) => console.error(err));

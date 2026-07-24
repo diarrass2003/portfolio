@@ -24,10 +24,10 @@ export const appConfig: ApplicationConfig = {
     // PWA Service Worker (actif en production uniquement)
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
-    
+
     // Client HTTP pour récupérer les fichiers JSON de traduction
-    provideHttpClient(withFetch())
-  ]
+    provideHttpClient(withFetch()),
+  ],
 };

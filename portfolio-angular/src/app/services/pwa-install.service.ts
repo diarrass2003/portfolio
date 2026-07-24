@@ -6,7 +6,7 @@ import { Injectable, signal } from '@angular/core';
  * pour afficher/masquer le bouton "Installer".
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PwaInstallService {
   // Signal réactif : true si l'installation est proposable

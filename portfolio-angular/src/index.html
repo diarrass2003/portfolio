@@ -1,77 +1,93 @@
 <!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <title>Diarrassouba | Développeur Full Stack</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio de Diarrassouba Yassoungo, Développeur Full Stack spécialisé en Angular, Node.js et UI/UX. Découvrez mes projets et mon parcours MIAGE.">
-  <meta name="keywords" content="Diarrassouba, Yassoungo, Développeur Full Stack, Angular, MIAGE, Portfolio, Côte d'Ivoire, Web Developer">
-  <meta name="author" content="Diarrassouba Yassoungo">
+  <head>
+    <meta charset="utf-8" />
+    <title>Diarrassouba | Développeur Full Stack</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Portfolio de Diarrassouba Yassoungo, Développeur Full Stack spécialisé en Angular, Node.js et UI/UX. Découvrez mes projets et mon parcours MIAGE."
+    />
+    <meta
+      name="keywords"
+      content="Diarrassouba, Yassoungo, Développeur Full Stack, Angular, MIAGE, Portfolio, Côte d'Ivoire, Web Developer"
+    />
+    <meta name="author" content="Diarrassouba Yassoungo" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://leyassoung-portfolio.vercel.app/">
-  <meta property="og:title" content="Diarrassouba Yassoungo | Développeur Full Stack">
-  <meta property="og:description" content="Découvrez mes réalisations et mon expertise en développement web moderne.">
-  <meta property="og:image" content="Assets/images/og-preview.png">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://leyassoung-portfolio.vercel.app/" />
+    <meta property="og:title" content="Diarrassouba Yassoungo | Développeur Full Stack" />
+    <meta
+      property="og:description"
+      content="Découvrez mes réalisations et mon expertise en développement web moderne."
+    />
+    <meta property="og:image" content="Assets/images/og-preview.png" />
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:title" content="Diarrassouba Yassoungo | Développeur Full Stack">
-  <meta property="twitter:description" content="Expertise Angular &amp; Full Stack.">
-  <meta property="twitter:image" content="Assets/images/og-preview.png">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Diarrassouba Yassoungo | Développeur Full Stack" />
+    <meta property="twitter:description" content="Expertise Angular &amp; Full Stack." />
+    <meta property="twitter:image" content="Assets/images/og-preview.png" />
 
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Diarrassouba Yassoungo",
-    "jobTitle": "Développeur Web Full Stack",
-    "url": "https://leyassoung-portfolio.vercel.app/",
-    "sameAs": [
-      "https://github.com/LeYASSOUNG",
-      "https://www.linkedin.com/in/yassoungo-youssouf-diarrassouba-0b7037306"
-    ],
-    "knowsAbout": ["Angular", "TypeScript", "Node.js", "UI/UX Design", "Java", "Spring Boot"]
-  }
-  </script>
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Diarrassouba Yassoungo",
+        "jobTitle": "Développeur Web Full Stack",
+        "url": "https://leyassoung-portfolio.vercel.app/",
+        "sameAs": [
+          "https://github.com/LeYASSOUNG",
+          "https://www.linkedin.com/in/yassoungo-youssouf-diarrassouba-0b7037306"
+        ],
+        "knowsAbout": ["Angular", "TypeScript", "Node.js", "UI/UX Design", "Java", "Spring Boot"]
+      }
+    </script>
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>"
+    />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Stylesheets are injected by Angular build (angular.json) -->
-  <!-- Apple Touch Icon -->
-  <link rel="apple-touch-icon" href="Assets/images/logo.png">
-  
-  <link rel="manifest" href="manifest.webmanifest">
-</head>
-<body>
-  <!-- Skip Link : Premier élément focusable, permet aux utilisateurs de clavier
+    <!-- Stylesheets are injected by Angular build (angular.json) -->
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="Assets/images/logo.png" />
+
+    <link rel="manifest" href="manifest.webmanifest" />
+  </head>
+  <body>
+    <!-- Skip Link : Premier élément focusable, permet aux utilisateurs de clavier
        de sauter directement au contenu principal en évitant la navbar -->
-  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
-  <!-- Scroll Progress -->
-  <div class="scroll-indicator" id="scrollIndicator"></div>
+    <!-- Scroll Progress -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
 
-  <!-- Animated Background -->
-  <div id="mesh-gradient">
+    <!-- Animated Background -->
+    <div id="mesh-gradient">
       <div class="mesh-ball mesh-ball-1"></div>
       <div class="mesh-ball mesh-ball-2"></div>
       <div class="mesh-ball mesh-ball-1 mesh-ball-3"></div>
-  </div>
+    </div>
 
-  <!-- Cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-dot" id="cursorDot"></div>
+    <!-- Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
 
-  <app-root></app-root>
+    <app-root></app-root>
 
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
-</body>
+    <noscript>Please enable JavaScript to continue using this application.</noscript>
+  </body>
 </html>

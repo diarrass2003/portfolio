@@ -9,6 +9,6 @@ import { MiniGame } from '../mini-game/mini-game';
 @Component({
   selector: 'app-home',
   imports: [Hero, About, Skills, Projects, MiniGame, Contact],
-  templateUrl: './home.html'
+  templateUrl: './home.html',
 })
-export class Home { }
+export class Home {}

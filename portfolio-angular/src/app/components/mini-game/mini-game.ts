@@ -34,14 +34,7 @@ const DIRECTIONS: Direction[] = [
   styleUrl: './mini-game.css',
 })
 export class MiniGame {
-  private readonly sourceWords = [
-    'JAVASCRIPT',
-    'PYTHON',
-    'JAVA',
-    'RUST',
-    'KOTLIN',
-    'SWIFT',
-  ];
+  private readonly sourceWords = ['JAVASCRIPT', 'PYTHON', 'JAVA', 'RUST', 'KOTLIN', 'SWIFT'];
 
   board = signal<BoardCell[][]>([]);
   words = signal<WordItem[]>([]);
@@ -197,6 +190,32 @@ export class MiniGame {
       words,
       board: board.map((row) => row.map((letter) => ({ letter, selected: false, found: false }))),
     };
+  }
+
+  private tryPlaceWord(board: string[][], word: string): void {
+    let placed = false;
+
+    for (let tries = 0; tries < 180 && !placed; tries++) {
+      const dir = DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)];
+      const row = Math.floor(Math.random() * SIZE);
+      const col = Math.floor(Math.random() * SIZE);
+
+      if (this.canPlaceWord(board, word, row, col, dir)) {
+        this.placeWord(board, word, row, col, dir);
+        placed = true;
+      }
+    }
+
+    if (!placed) {
+      for (let r = 0; r < SIZE && !placed; r++) {
+        for (let c = 0; c <= SIZE - word.length && !placed; c++) {
+          if (this.canPlaceWord(board, word, r, c, { r: 0, c: 1 })) {
+            this.placeWord(board, word, r, c, { r: 0, c: 1 });
+            placed = true;
+          }
+        }
+      }
+    }
   }
 
   private canPlaceWord(board: string[][], word: string, row: number, col: number, dir: Direction): boolean {

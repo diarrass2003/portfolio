@@ -1,14 +1,11 @@
-import { Injectable, signal } from '@angular/core';
+import re
+import os
 
-export interface RepoStats {
-  stars: number;
-  forks: number;
-}
+path = 'src/app/services/github.ts'
+with open(path, 'r', encoding='utf-8') as f:
+    code = f.read()
 
-@Injectable({
-  providedIn: 'root',
-})
-export class GithubService {
+new_class_content = """export class GithubService {
   private readonly API_URL = 'https://api.github.com/repos/';
 
   async getRepoStats(repoPath: string): Promise<RepoStats> {
@@ -43,12 +40,7 @@ export class GithubService {
     }
   }
 
-  private async handleResponse(
-    response: Response,
-    repoPath: string,
-    cacheKey: string,
-    fallback: RepoStats,
-  ): Promise<RepoStats> {
+  private async handleResponse(response: Response, repoPath: string, cacheKey: string, fallback: RepoStats): Promise<RepoStats> {
     if (response.status === 404) {
       console.warn(`GitHub repository '${repoPath}' not found.`);
       return { stars: 0, forks: 0 };
@@ -73,4 +65,9 @@ export class GithubService {
       console.warn(`Could not fetch live GitHub stats for ${repoPath}. Error: ${error.message}`);
     }
   }
-}
+}"""
+
+code = re.sub(r'export class GithubService \{[\s\S]*^\}', new_class_content, code, flags=re.MULTILINE)
+
+with open(path, 'w', encoding='utf-8') as f:
+    f.write(code)

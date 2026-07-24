@@ -1,127 +1,177 @@
 <!-- Section Projets : Liste des réalisations avec carrousel d'images et liens GitHub/Démo -->
 <section id="projects" class="projects-section" aria-labelledby="projects-title">
   <div class="container">
-      <div class="section-header reveal">
-          <h2 id="projects-title" class="gradient-text">
-            <i class="fas fa-project-diagram" aria-hidden="true"></i> {{ translation.translate('projects.title') }}
-          </h2>
-          <p>{{ translation.translate('projects.subtitle') }}</p>
-      </div>
+    <div class="section-header reveal">
+      <h2 id="projects-title" class="gradient-text">
+        <i class="fas fa-project-diagram" aria-hidden="true"></i> {{ translation.translate('projects.title') }}
+      </h2>
+      <p>{{ translation.translate('projects.subtitle') }}</p>
+    </div>
 
-      <!-- Grille des projets : Boucle dynamique sur la liste des projets avec Angular @for -->
-      <div class="projects-grid reveal" role="list">
-              @for (project of projects(); track project.id; let idx = $index) {
-                <div class="project-wrapper" role="listitem">
-                    <article class="project-glass-card glass-card magnetic" [class.project-featured]="idx === 0"
-                             [attr.aria-label]="translation.translate('projects.' + project.id + '_title')">
+    <!-- Grille des projets : Boucle dynamique sur la liste des projets avec Angular @for -->
+    <div class="projects-grid reveal" role="list">
+      @for (project of projects(); track project.id; let idx = $index) {
+        <div class="project-wrapper" role="listitem">
+          <article
+            class="project-glass-card glass-card magnetic"
+            [class.project-featured]="idx === 0"
+            [attr.aria-label]="translation.translate('projects.' + project.id + '_title')"
+          >
+            <!-- Badge "Projet Mis en avant" pour le premier élément -->
+            @if (idx === 0) {
+              <div class="project-featured-badge" aria-label="Projet mis en vedette">
+                <i class="fas fa-star" aria-hidden="true"></i> {{ translation.translate('projects.featured') }}
+              </div>
+            }
 
-                        <!-- Badge "Projet Mis en avant" pour le premier élément -->
-                        @if (idx === 0) {
-                          <div class="project-featured-badge" aria-label="Projet mis en vedette">
-                            <i class="fas fa-star" aria-hidden="true"></i> {{ translation.translate('projects.featured') }}
-                          </div>
-                        }
+            <!-- Project Number -->
+            <div class="project-number" aria-hidden="true">{{ (idx + 1).toString().padStart(2, '0') }}</div>
 
-                        <!-- Project Number -->
-                        <div class="project-number" aria-hidden="true">{{ (idx + 1).toString().padStart(2, '0') }}</div>
+            <!-- Conteneur d'images avec Swiper.js pour le carrousel interne -->
+            <div class="project-img-container shimmer-wrapper">
+              <!-- Inner Swiper for Project Images -->
+              <div
+                class="swiper project-inner-swiper"
+                role="region"
+                [attr.aria-label]="
+                  'Carrousel d\'images — ' + translation.translate('projects.' + project.id + '_title')
+                "
+              >
+                <div class="swiper-wrapper">
+                  @for (img of project.images; track img) {
+                    <div class="swiper-slide">
+                      <img
+                        [src]="img"
+                        title="{{ translation.translate('projects.' + project.id + '_title') }}"
+                        alt="{{ translation.translate('projects.' + project.id + '_title') }} — capture d'écran"
+                        class="project-image"
+                      />
+                    </div>
+                  }
+                </div>
+                <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
+                <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
+                <div class="project-img-pagination" role="tablist" aria-label="Navigation des images"></div>
+              </div>
 
-                        <!-- Conteneur d'images avec Swiper.js pour le carrousel interne -->
-                        <div class="project-img-container shimmer-wrapper">
-                            <!-- Inner Swiper for Project Images -->
-                            <div class="swiper project-inner-swiper"
-                                 role="region"
-                                 [attr.aria-label]="'Carrousel d\'images — ' + translation.translate('projects.' + project.id + '_title')">
-                                <div class="swiper-wrapper">
-                                    @for (img of project.images; track img) {
-                                      <div class="swiper-slide">
-                                        <img [src]="img"
-                                             title="{{ translation.translate('projects.' + project.id + '_title') }}"
-                                             alt="{{ translation.translate('projects.' + project.id + '_title') }} — capture d'écran"
-                                             class="project-image">
-                                      </div>
-                                    }
-                                </div>
-                                <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
-                                <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
-                                <div class="project-img-pagination" role="tablist" aria-label="Navigation des images"></div>
-                            </div>
+              <div class="project-overlay" aria-hidden="true">
+                <div class="overlay-content">
+                  <a
+                    [href]="project.githubUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="overlay-link magnetic"
+                    [attr.aria-label]="
+                      'Code source — ' +
+                      translation.translate('projects.' + project.id + '_title') +
+                      ' (GitHub, nouvelle fenêtre)'
+                    "
+                  >
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span>{{ translation.translate('projects.code') }}</span>
+                  </a>
+                  @if (project.demoUrl !== '#') {
+                    <a
+                      [href]="project.demoUrl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="overlay-link magnetic"
+                      [attr.aria-label]="
+                        'Démo live — ' +
+                        translation.translate('projects.' + project.id + '_title') +
+                        ' (nouvelle fenêtre)'
+                      "
+                    >
+                      <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                      <span>{{ translation.translate('projects.live') }}</span>
+                    </a>
+                  }
+                </div>
+              </div>
 
-                            <div class="project-overlay" aria-hidden="true">
-                                <div class="overlay-content">
-                                    <a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer"
-                                       class="overlay-link magnetic"
-                                       [attr.aria-label]="'Code source — ' + translation.translate('projects.' + project.id + '_title') + ' (GitHub, nouvelle fenêtre)'">
-                                        <i class="fab fa-github" aria-hidden="true"></i>
-                                        <span>{{ translation.translate('projects.code') }}</span>
-                                    </a>
-                                    @if (project.demoUrl !== '#') {
-                                      <a [href]="project.demoUrl" target="_blank" rel="noopener noreferrer"
-                                         class="overlay-link magnetic"
-                                         [attr.aria-label]="'Démo live — ' + translation.translate('projects.' + project.id + '_title') + ' (nouvelle fenêtre)'">
-                                          <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                          <span>{{ translation.translate('projects.live') }}</span>
-                                      </a>
-                                    }
-                                </div>
-                            </div>
-
-                            <!-- GitHub Stats Badge -->
-                            @if (project.stats) {
-                              <div class="github-stats-badge" aria-label="Statistiques GitHub">
-                                <span class="stat-item">
-                                  <i class="fas fa-star" aria-hidden="true"></i>
-                                  <span class="sr-only">Étoiles : </span>{{ project.stats.stars }}
-                                </span>
-                                <span class="stat-item">
-                                  <i class="fas fa-code-branch" aria-hidden="true"></i>
-                                  <span class="sr-only">Forks : </span>{{ project.stats.forks }}
-                                </span>
-                              </div>
-                            }
-                        </div>
-
-                        <!-- Contenu textuel, tags des technologies et boutons d'action -->
-                        <div class="project-content">
-                            <h3 class="project-title">{{ translation.translate('projects.' + project.id + '_title') }}</h3>
-                            <p class="project-desc">{{ translation.translate('projects.' + project.id + '_desc') }}</p>
-                            <div class="project-tags" role="list" aria-label="Technologies utilisées">
-                                @for (tag of project.tags; track tag) {
-                                  <span class="tag-pill" role="listitem" [ngClass]="{
-                                    'tag-blue': tag === 'Angular' || tag === 'CSS Architecture',
-                                    'tag-purple': tag === 'Java' || tag === 'Next.js' || tag === 'PWA',
-                                    'tag-cyan': tag === 'PostgreSQL' || tag === 'UI/UX',
-                                    'tag-green': tag === 'Node.js',
-                                    'tag-yellow': tag === 'Spring Boot'
-                                  }">{{ tag }}</span>
-                                }
-                            </div>
-                            <!-- Inline action buttons (always visible, not just on hover) -->
-                            <div class="project-actions">
-                                <a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer"
-                                   class="project-action-btn"
-                                   [attr.aria-label]="'Code source de ' + translation.translate('projects.' + project.id + '_title') + ' sur GitHub (nouvelle fenêtre)'">
-                                    <i class="fab fa-github" aria-hidden="true"></i> {{ translation.translate('projects.code') }}
-                                </a>
-                                @if (project.demoUrl !== '#') {
-                                  <a [href]="project.demoUrl" target="_blank" rel="noopener noreferrer"
-                                     class="project-action-btn project-action-btn--demo"
-                                     [attr.aria-label]="'Voir la démo de ' + translation.translate('projects.' + project.id + '_title') + ' (nouvelle fenêtre)'">
-                                      <i class="fas fa-external-link-alt" aria-hidden="true"></i> {{ translation.translate('projects.live') }}
-                                  </a>
-                                }
-                            </div>
-                        </div>
-                    </article>
+              <!-- GitHub Stats Badge -->
+              @if (project.stats) {
+                <div class="github-stats-badge" aria-label="Statistiques GitHub">
+                  <span class="stat-item">
+                    <i class="fas fa-star" aria-hidden="true"></i>
+                    <span class="sr-only">Étoiles : </span>{{ project.stats.stars }}
+                  </span>
+                  <span class="stat-item">
+                    <i class="fas fa-code-branch" aria-hidden="true"></i>
+                    <span class="sr-only">Forks : </span>{{ project.stats.forks }}
+                  </span>
                 </div>
               }
-      </div>
+            </div>
 
-      <div class="projects-cta-wrap reveal">
-          <a href="https://github.com/LeYASSOUNG" target="_blank" rel="noopener noreferrer"
-             class="btn-primary magnetic"
-             aria-label="Voir tous mes projets sur GitHub (nouvelle fenêtre)">
-              {{ translation.translate('projects.view_github') }} <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </a>
-      </div>
+            <!-- Contenu textuel, tags des technologies et boutons d'action -->
+            <div class="project-content">
+              <h3 class="project-title">{{ translation.translate('projects.' + project.id + '_title') }}</h3>
+              <p class="project-desc">{{ translation.translate('projects.' + project.id + '_desc') }}</p>
+              <div class="project-tags" role="list" aria-label="Technologies utilisées">
+                @for (tag of project.tags; track tag) {
+                  <span
+                    class="tag-pill"
+                    role="listitem"
+                    [ngClass]="{
+                      'tag-blue': tag === 'Angular' || tag === 'CSS Architecture',
+                      'tag-purple': tag === 'Java' || tag === 'Next.js' || tag === 'PWA',
+                      'tag-cyan': tag === 'PostgreSQL' || tag === 'UI/UX',
+                      'tag-green': tag === 'Node.js',
+                      'tag-yellow': tag === 'Spring Boot',
+                    }"
+                    >{{ tag }}</span
+                  >
+                }
+              </div>
+              <!-- Inline action buttons (always visible, not just on hover) -->
+              <div class="project-actions">
+                <a
+                  [href]="project.githubUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-action-btn"
+                  [attr.aria-label]="
+                    'Code source de ' +
+                    translation.translate('projects.' + project.id + '_title') +
+                    ' sur GitHub (nouvelle fenêtre)'
+                  "
+                >
+                  <i class="fab fa-github" aria-hidden="true"></i> {{ translation.translate('projects.code') }}
+                </a>
+                @if (project.demoUrl !== '#') {
+                  <a
+                    [href]="project.demoUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-action-btn project-action-btn--demo"
+                    [attr.aria-label]="
+                      'Voir la démo de ' +
+                      translation.translate('projects.' + project.id + '_title') +
+                      ' (nouvelle fenêtre)'
+                    "
+                  >
+                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                    {{ translation.translate('projects.live') }}
+                  </a>
+                }
+              </div>
+            </div>
+          </article>
+        </div>
+      }
+    </div>
+
+    <div class="projects-cta-wrap reveal">
+      <a
+        href="https://github.com/LeYASSOUNG"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-primary magnetic"
+        aria-label="Voir tous mes projets sur GitHub (nouvelle fenêtre)"
+      >
+        {{ translation.translate('projects.view_github') }} <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
   </div>
 </section>

@@ -88,9 +88,15 @@
 }
 
 @keyframes cvFloat {
-  0%   { transform: translate(0, 0)   scale(1);   }
-  50%  { transform: translate(30px, -20px) scale(1.08); }
-  100% { transform: translate(-20px, 30px) scale(0.95); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.08);
+  }
+  100% {
+    transform: translate(-20px, 30px) scale(0.95);
+  }
 }
 
 /* ── Wrapper & Layout ─────────────────────────────────────────── */
@@ -162,9 +168,11 @@ html:not(.dark) .cv-sidebar {
   padding: 4px; /* Slightly thinner */
   border-radius: 50%;
   background: var(--grad-aurora);
-  box-shadow: 0 0 40px rgba(99, 102, 241, 0.4), inset 0 0 15px rgba(0,0,0,0.5);
+  box-shadow:
+    0 0 40px rgba(99, 102, 241, 0.4),
+    inset 0 0 15px rgba(0, 0, 0, 0.5);
   margin-bottom: 1rem;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .cv-avatar {
@@ -212,8 +220,15 @@ html:not(.dark) .cv-sidebar {
 }
 
 @keyframes cvPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.5; transform: scale(1.4); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.4);
+  }
 }
 
 .cv-halo {
@@ -791,13 +806,13 @@ html:not(.dark) .cv-sidebar {
     padding-left: 1.1rem;
     gap: 1rem;
   }
-  
+
   .cv-timeline-marker {
     left: -1.25rem;
     width: 10px;
     height: 10px;
   }
-  
+
   .cv-timeline-body {
     padding: 0.8rem;
   }
@@ -825,12 +840,24 @@ html:not(.dark) .cv-sidebar {
 }
 
 /* ── Skill Width Utility Classes (replacing inline styles) ────────── */
-.skill-w-90 { width: 90%; }
-.skill-w-80 { width: 80%; }
-.skill-w-75 { width: 75%; }
-.skill-w-70 { width: 70%; }
-.skill-w-65 { width: 65%; }
-.skill-w-45 { width: 45%; }
+.skill-w-90 {
+  width: 90%;
+}
+.skill-w-80 {
+  width: 80%;
+}
+.skill-w-75 {
+  width: 75%;
+}
+.skill-w-70 {
+  width: 70%;
+}
+.skill-w-65 {
+  width: 65%;
+}
+.skill-w-45 {
+  width: 45%;
+}
 
 /* ── Section Icon Color Variants ──────────────────────────────────── */
 .cv-icon-green {
