@@ -133,11 +133,16 @@
                   <a href="mailto:diarrassoubayassoungo33@gmail.com"> diarrassoubayassoungo33&#64;gmail.com </a>
                   <button
                     class="copy-btn-mini"
-                    (click)="copyText('diarrassoubayassoungo33@gmail.com', emailCopyBtn)"
-                    #emailCopyBtn
+                    (click)="copyText('diarrassoubayassoungo33@gmail.com', 'email')"
                     aria-label="Copier l'adresse email dans le presse-papier"
                   >
-                    <i class="far fa-copy" aria-hidden="true"></i>
+                    <i
+                      class="far"
+                      [class.fa-check]="emailCopied"
+                      [class.fa-copy]="!emailCopied"
+                      [style.color]="emailCopied ? '#22c55e' : ''"
+                      aria-hidden="true"
+                    ></i>
                   </button>
                 </p>
               </div>
