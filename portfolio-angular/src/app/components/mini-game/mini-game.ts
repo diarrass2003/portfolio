@@ -192,7 +192,7 @@ export class MiniGame {
     };
   }
 
-  private canPlaceWord(board: string[][], word: string, row: number, col: number, dir: Direction): boolean {
+  private tryPlaceWord(board: string[][], word: string): void {\n    let placed = false;\n\n    for (let tries = 0; tries < 180 && !placed; tries++) {\n      const dir = DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)];\n      const row = Math.floor(Math.random() * SIZE);\n      const col = Math.floor(Math.random() * SIZE);\n\n      if (this.canPlaceWord(board, word, row, col, dir)) {\n        this.placeWord(board, word, row, col, dir);\n        placed = true;\n      }\n    }\n\n    if (!placed) {\n      for (let r = 0; r < SIZE && !placed; r++) {\n        for (let c = 0; c <= SIZE - word.length && !placed; c++) {\n          if (this.canPlaceWord(board, word, r, c, { r: 0, c: 1 })) {\n            this.placeWord(board, word, r, c, { r: 0, c: 1 });\n            placed = true;\n          }\n        }\n      }\n    }\n  }\n\n  private canPlaceWord(board: string[][], word: string, row: number, col: number, dir: Direction): boolean {
     for (let i = 0; i < word.length; i++) {
       const rr = row + dir.r * i;
       const cc = col + dir.c * i;
