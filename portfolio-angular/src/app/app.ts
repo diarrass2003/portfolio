@@ -30,6 +30,8 @@ export class App implements AfterViewInit {
 
   private cx = 0; // Position X actuelle du curseur fluide (interpolation)
   private cy = 0; // Position Y actuelle du curseur fluide (interpolation)
+  private isMagnetic = false;
+  private magneticTarget: HTMLElement | null = null;
 
   private animationFrameId: number | null = null; // ID de la boucle d'animation
   private isBrowser: boolean; // Flag pour éviter les erreurs de DOM sur le serveur (SSR)
@@ -61,31 +63,29 @@ export class App implements AfterViewInit {
   ngAfterViewInit() {
     if (!this.isBrowser) return;
 
-    // Indique que le JS est prêt pour activer certaines règles CSS
-    this.document.body.classList.add('js-ready');
+    const body = this.document.body;
+    body.classList.add('js-ready');
 
-    // --- GESTION DU CURSEUR PERSONNALISÉ ---
+    this.initCursor();
+    this.setupInteractions();
+    this.initObservers();
+  }
+
+  private initCursor() {
     const cur = this.document.getElementById('cursor');
     const dot = this.document.getElementById('cursorDot');
 
-    let isMagnetic = false;
-    let magneticTarget: HTMLElement | null = null;
-
-    // Fonction d'animation fluide recalculée à chaque rafraîchissement d'écran
     const steps = () => {
       let targetX = this.mx;
       let targetY = this.my;
 
-      if (isMagnetic && magneticTarget) {
-        const rect = magneticTarget.getBoundingClientRect();
+      if (this.isMagnetic && this.magneticTarget) {
+        const rect = this.magneticTarget.getBoundingClientRect();
         targetX = rect.left + rect.width / 2;
         targetY = rect.top + rect.height / 2;
-
-        // Apply magnetic pull
         this.cx += (targetX - this.cx) * 0.2;
         this.cy += (targetY - this.cy) * 0.2;
       } else {
-        // Interpolation mathématique (Lerp) pour donner un effet de "retard" au curseur
         this.cx += (targetX - this.cx) * 0.15;
         this.cy += (targetY - this.cy) * 0.15;
       }
@@ -105,37 +105,30 @@ export class App implements AfterViewInit {
     if (cur || dot) {
       this.animationFrameId = requestAnimationFrame(steps);
     }
+  }
 
-    /**
-     * Initialise les interactions du curseur sur les éléments cliquables.
-     * Ajoute des classes CSS pour transformer le curseur (magnétisme, grossissement).
-     */
-    const setupInteractions = () => {
-      const hoverElements = this.document.querySelectorAll('a, button, .interactive, .magnetic');
-      hoverElements.forEach((el) => {
-        const htmlEl = el as HTMLElement;
+  private setupInteractions() {
+    const cur = this.document.getElementById('cursor');
+    const hoverElements = this.document.querySelectorAll('a, button, .interactive, .magnetic');
+    hoverElements.forEach((el) => {
+      const htmlEl = el as HTMLElement;
 
-        htmlEl.addEventListener('mouseenter', () => {
-          cur?.classList.add('hovered');
-          // Active l'effet magnétique si l'élément possède la classe ou est un bouton
-          if (htmlEl.classList.contains('magnetic') || htmlEl.tagName === 'A' || htmlEl.tagName === 'BUTTON') {
-            isMagnetic = true;
-            magneticTarget = htmlEl;
-            cur?.classList.add('magnetic-active');
-          }
-        });
-
-        htmlEl.addEventListener('mouseleave', () => {
-          cur?.classList.remove('hovered');
-          isMagnetic = false;
-          magneticTarget = null;
-          cur?.classList.remove('magnetic-active');
-        });
+      htmlEl.addEventListener('mouseenter', () => {
+        cur?.classList.add('hovered');
+        if (htmlEl.classList.contains('magnetic') || htmlEl.tagName === 'A' || htmlEl.tagName === 'BUTTON') {
+          this.isMagnetic = true;
+          this.magneticTarget = htmlEl;
+          cur?.classList.add('magnetic-active');
+        }
       });
-    };
 
-    setupInteractions();
-    this.initObservers();
+      htmlEl.addEventListener('mouseleave', () => {
+        cur?.classList.remove('hovered');
+        this.isMagnetic = false;
+        this.magneticTarget = null;
+        cur?.classList.remove('magnetic-active');
+      });
+    });
   }
 
   /**

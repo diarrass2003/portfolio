@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 export interface RepoStats {
   stars: number;
@@ -23,7 +23,8 @@ export class GithubService {
     const cached = localStorage.getItem(cacheKey);
     if (!cached) return null;
     const { data, timestamp } = JSON.parse(cached);
-    return Date.now() - timestamp > 3600000 ? null : data;
+    const CACHE_DURATION_MS = 3600000;
+    return Date.now() - timestamp > CACHE_DURATION_MS ? null : data;
   }
 
   private async fetchLiveStats(repoPath: string, cacheKey: string): Promise<RepoStats> {
@@ -32,7 +33,8 @@ export class GithubService {
 
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000);
+      const FETCH_TIMEOUT_MS = 5000;
+      const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
       const response = await fetch(`${this.API_URL}${repoPath}`, { signal: controller.signal });
       clearTimeout(timeoutId);
 
@@ -49,12 +51,14 @@ export class GithubService {
     cacheKey: string,
     fallback: RepoStats,
   ): Promise<RepoStats> {
-    if (response.status === 404) {
+    const HTTP_NOT_FOUND = 404;
+    const HTTP_FORBIDDEN = 403;
+
+    if (response.status === HTTP_NOT_FOUND) {
       console.warn(`GitHub repository '${repoPath}' not found.`);
       return { stars: 0, forks: 0 };
     }
-    if (response.status === 403) {
-      console.info(`Rate limit reached for GitHub API. Using cached data for ${repoPath}.`);
+    if (response.status === HTTP_FORBIDDEN) {
       if (fallback.stars > 0 || fallback.forks > 0) return fallback;
       throw new Error('Rate limit exceeded');
     }

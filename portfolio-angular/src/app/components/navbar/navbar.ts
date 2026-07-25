@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, Inject, PLATFORM_ID, Renderer2, RendererFactory2 } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser, CommonModule } from '@angular/common';
 import { TranslationService } from '../../services/translation.service';
 import { PwaInstallService } from '../../services/pwa-install.service';
@@ -19,12 +19,16 @@ export class Navbar {
   isDarkTheme = false;
   isScrolled = false;
 
+  private renderer: Renderer2;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: Object,
     public translation: TranslationService,
     public pwaInstall: PwaInstallService,
+    private rendererFactory: RendererFactory2
   ) {
+    this.renderer = this.rendererFactory.createRenderer(null, null);
     // Restaure le thème sauvegardé, ou utilise la préférence système du navigateur
     if (isPlatformBrowser(this.platformId)) {
       const saved = localStorage.getItem('theme');
@@ -68,10 +72,11 @@ export class Navbar {
 
   /** Applique la classe CSS globale 'dark' sur l'élément racine <html> */
   private applyTheme(dark: boolean) {
+    const root = this.document.documentElement;
     if (dark) {
-      this.document.documentElement.classList.add('dark');
+      this.renderer.addClass(root, 'dark');
     } else {
-      this.document.documentElement.classList.remove('dark');
+      this.renderer.removeClass(root, 'dark');
     }
   }
 
@@ -89,7 +94,8 @@ export class Navbar {
         const element = this.document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
+          const SCROLL_OFFSET = 100;
+          if (rect.top <= SCROLL_OFFSET && rect.bottom >= SCROLL_OFFSET) {
             this.activeSection = section;
           }
         }

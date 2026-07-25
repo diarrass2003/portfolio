@@ -167,42 +167,54 @@ export class MiniGame {
   }
 
   private fillRandomLetters(board: string[][]): void {
-    for (let r = 0; r < SIZE; r++) {
-      for (let c = 0; c < SIZE; c++) {
-        if (!board[r][c]) {
-          board[r][c] = ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
-        }
+    const totalCells = SIZE * SIZE;
+    for (let i = 0; i < totalCells; i++) {
+      const r = Math.floor(i / SIZE);
+      const c = i % SIZE;
+      if (!board[r][c]) {
+        board[r][c] = ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
       }
     }
   }
 
   private tryPlaceWord(board: string[][], word: string): void {
-    let placed = false;
+    if (this.tryPlaceWordRandomly(board, word)) return;
+    this.tryPlaceWordFallback(board, word);
+  }
 
-    for (let tries = 0; tries < 180 && !placed; tries++) {
-      const dir = DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)];
-      const row = Math.floor(Math.random() * SIZE);
-      const col = Math.floor(Math.random() * SIZE);
+  private tryPlaceWordRandomly(board: string[][], word: string): boolean {
+    const MAX_TRIES = 180;
+    for (let tries = 0; tries < MAX_TRIES; tries++) {
+      const placement = {
+        dir: DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)],
+        row: Math.floor(Math.random() * SIZE),
+        col: Math.floor(Math.random() * SIZE),
+      };
 
-      if (this.canPlaceWord(board, word, row, col, dir)) {
-        this.placeWord(board, word, row, col, dir);
-        placed = true;
+      if (this.canPlaceWord(board, word, placement)) {
+        this.placeWord(board, word, placement);
+        return true;
       }
     }
+    return false;
+  }
 
-    if (!placed) {
-      for (let r = 0; r < SIZE && !placed; r++) {
-        for (let c = 0; c <= SIZE - word.length && !placed; c++) {
-          if (this.canPlaceWord(board, word, r, c, { r: 0, c: 1 })) {
-            this.placeWord(board, word, r, c, { r: 0, c: 1 });
-            placed = true;
-          }
-        }
+  private tryPlaceWordFallback(board: string[][], word: string): void {
+    const maxCols = SIZE - word.length + 1;
+    const totalCells = SIZE * maxCols;
+    for (let i = 0; i < totalCells; i++) {
+      const r = Math.floor(i / maxCols);
+      const c = i % maxCols;
+      const placement = { row: r, col: c, dir: { r: 0, c: 1 } };
+      if (this.canPlaceWord(board, word, placement)) {
+        this.placeWord(board, word, placement);
+        return;
       }
     }
   }
 
-  private canPlaceWord(board: string[][], word: string, row: number, col: number, dir: Direction): boolean {
+  private canPlaceWord(board: string[][], word: string, placement: { row: number; col: number; dir: Direction }): boolean {
+    const { row, col, dir } = placement;
     for (let i = 0; i < word.length; i++) {
       const rr = row + dir.r * i;
       const cc = col + dir.c * i;
@@ -213,7 +225,8 @@ export class MiniGame {
     return true;
   }
 
-  private placeWord(board: string[][], word: string, row: number, col: number, dir: Direction): void {
+  private placeWord(board: string[][], word: string, placement: { row: number; col: number; dir: Direction }): void {
+    const { row, col, dir } = placement;
     for (let i = 0; i < word.length; i++) {
       const rr = row + dir.r * i;
       const cc = col + dir.c * i;

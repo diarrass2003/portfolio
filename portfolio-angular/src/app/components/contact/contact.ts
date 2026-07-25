@@ -17,6 +17,8 @@ export class Contact {
   isSubmitting = false;
   formMessageClass = '';
   formMessageText = '';
+  emailCopied = false;
+  phoneCopied = false;
 
   constructor(public translation: TranslationService) {}
 
@@ -54,19 +56,22 @@ export class Contact {
   }
 
   /**
-   * Copie un texte ciblé dans le presse-papier de l'utilisateur (ex: l'adresse mail).
+   * Copie un texte ciblé dans le presse-papier de l'utilisateur.
    * @param text La chaine de caractères à copier.
-   * @param btnElement L'élément graphique dont on veut remplacer le contenu par une icône "Check".
+   * @param type Le type de donnée ('email' ou 'phone') pour mettre à jour l'icône correspondante.
    */
-  copyText(text: string, btnElement: HTMLElement) {
-    navigator.clipboard.writeText(text).then(() => {
-      const orig = btnElement.innerHTML; // Sauvegarde l'icône originale
-      btnElement.innerHTML = '<i class="fas fa-check" style="color:#22c55e"></i>';
+  async copyText(text: string, type: 'email' | 'phone') {
+    try {
+      await navigator.clipboard.writeText(text);
+      if (type === 'email') this.emailCopied = true;
+      if (type === 'phone') this.phoneCopied = true;
 
-      // Restaure le bouton HTML à son état d'origine après 1,6 secondes
       setTimeout(() => {
-        btnElement.innerHTML = orig;
+        if (type === 'email') this.emailCopied = false;
+        if (type === 'phone') this.phoneCopied = false;
       }, 1600);
-    });
+    } catch (err) {
+      console.warn('Erreur lors de la copie dans le presse-papier', err);
+    }
   }
 }

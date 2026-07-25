@@ -1,9 +1,9 @@
-import { Component, AfterViewInit, OnDestroy, PLATFORM_ID, Inject, signal, WritableSignal } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, PLATFORM_ID, Inject, signal } from '@angular/core';
 import { CommonModule, isPlatformBrowser, NgClass } from '@angular/common';
 import { TranslationService } from '../../services/translation.service';
 import { GithubService, RepoStats } from '../../services/github';
 import { Swiper } from 'swiper';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 
 interface Project {
   id: string;
@@ -67,15 +67,19 @@ export class Projects implements AfterViewInit, OnDestroy {
    * Initialisation : Récupération asynchrone des statistiques GitHub (Stars/Forks).
    */
   async ngOnInit() {
-    const currentProjects = [...this.projects()];
-    for (let i = 0; i < currentProjects.length; i++) {
-      if (currentProjects[i].repo) {
-        // Appel au service GitHub pour chaque dépôt
-        currentProjects[i].stats = await this.github.getRepoStats(currentProjects[i].repo);
-        // On met à jour le signal progressivement pour que l'utilisateur voit les chiffres apparaître
-        this.projects.set([...currentProjects]);
-      }
-    }
+    const currentProjects = this.projects();
+    await Promise.all(
+      currentProjects.map(async (project, i) => {
+        if (project.repo) {
+          const stats = await this.github.getRepoStats(project.repo);
+          this.projects.update((projects) => {
+            const updated = [...projects];
+            updated[i] = { ...updated[i], stats };
+            return updated;
+          });
+        }
+      })
+    );
   }
 
   ngAfterViewInit() {
@@ -95,7 +99,8 @@ export class Projects implements AfterViewInit, OnDestroy {
    * Initialise le défilement automatique du carrousel des projets sur mobile.
    */
   private initMobileAutoScroll() {
-    if (window.innerWidth > 992) return;
+    const MOBILE_BREAKPOINT = 992;
+    if (window.innerWidth > MOBILE_BREAKPOINT) return;
 
     setTimeout(() => {
       const grid = document.querySelector('.projects-grid') as HTMLElement;

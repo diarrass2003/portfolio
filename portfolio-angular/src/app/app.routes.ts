@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { Home } from './components/home/home';
+import { Cv } from './components/cv/cv';
 
 /**
  * Configuration globale des routes de la Single Page Application (SPA).
@@ -7,12 +9,12 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./components/home/home').then((m) => m.Home),
+    component: Home,
     data: { animation: 'HomePage' },
   }, // Page d'accueil par défaut (le portfolio central)
   {
     path: 'cv',
-    loadComponent: () => import('./components/cv/cv').then((m) => m.Cv),
+    component: Cv,
     data: { animation: 'CvPage' },
   }, // Page du profil complet CV
   { path: '**', redirectTo: '' }, // Redirection de sécurité
