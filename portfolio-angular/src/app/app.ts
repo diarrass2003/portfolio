@@ -130,8 +130,6 @@ export class App implements AfterViewInit {
       });
     });
   }
-    this.initObservers();
-  }
 
   /**
    * Retourne l'état de l'animation basé sur la route active.
