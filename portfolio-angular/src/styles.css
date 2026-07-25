@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-body, body * {
+body, body *:not(.fa):not(.fas):not(.fab):not(.far):not(.fa-solid):not(.fa-brands):not(.fa-regular) {
   font-family: 'Times New Roman', serif !important;
 }
 
