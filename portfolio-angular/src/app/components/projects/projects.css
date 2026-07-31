@@ -1,4 +1,12 @@
 /* herald-disable max_file_lines */
+/* ── Fail-safe Visibility ───────────────────────────────────────── */
+.projects-section .reveal,
+.projects-section .reveal.visible {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
 /* ── Projects Global Swiper ───────────────────────────────────── */
 .projects-global-swiper {
   padding: 20px 0 70px !important;
@@ -6,6 +14,60 @@
 
 .project-slide {
   height: auto !important;
+}
+
+/* ── Category Filter Bar ───────────────────────────────────────── */
+.projects-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 30px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.filter-pill i {
+  font-size: 0.95rem;
+  color: currentColor;
+  transition: transform 0.3s var(--ease);
+}
+
+.filter-pill:hover {
+  color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.2);
+}
+
+.filter-pill:hover i {
+  transform: scale(1.15);
+}
+
+.filter-pill.active {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+}
+
+.filter-pill.active i {
+  color: #ffffff;
 }
 
 /* ── Projects Grid Layout ───────────────────────────────────────── */
@@ -20,9 +82,11 @@
 .project-img-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 24px 24px 0 0;
+  background: var(--bg-card);
+  flex-shrink: 0;
 }
 
 /* ── Glass Card ────────────────────────────────────────────────── */
@@ -133,12 +197,19 @@
 
 /* ── Inner Swiper ──────────────────────────────────────────────── */
 .project-inner-swiper {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  min-height: 0; /* critical: prevents infinite height */
-  border-radius: 18px;
+  height: 100%;
+  border-radius: 24px 24px 0 0;
   box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
   z-index: 1;
+}
+
+.project-inner-swiper .swiper-wrapper,
+.project-inner-swiper .swiper-slide {
+  width: 100%;
+  height: 100%;
 }
 
 .project-img-container.shimmer-wrapper::after {
@@ -149,18 +220,23 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
   display: block;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-glass-card:hover .project-image {
+  transform: scale(1.04);
 }
 
 /* ── Inner Navigation Arrows ───────────────────────────────────── */
 .project-inner-swiper .swiper-button-next,
 .project-inner-swiper .swiper-button-prev {
   color: #fff !important;
-  transform: scale(0.6);
-  background: rgba(0, 0, 0, 0.5);
-  width: 40px;
-  height: 40px;
+  transform: scale(0.65);
+  background: rgba(0, 0, 0, 0.55);
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -173,23 +249,43 @@
 
 .project-inner-swiper .swiper-button-next::after,
 .project-inner-swiper .swiper-button-prev::after {
-  font-size: 20px;
+  font-size: 18px;
 }
 
-/* ── Inner Fraction Pagination ─────────────────────────────────── */
+/* ── Inner Bullet Pagination ─────────────────────────────────── */
 .project-img-pagination {
   position: absolute;
-  bottom: 10px !important;
-  right: 10px !important;
-  left: auto !important;
+  bottom: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%);
   width: auto !important;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  padding: 2px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
   border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
   z-index: 10;
+}
+
+.project-img-pagination .swiper-pagination-bullet {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  opacity: 0.7 !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer;
+}
+
+.project-img-pagination .swiper-pagination-bullet-active {
+  width: 20px !important;
+  border-radius: 10px !important;
+  background: var(--accent-cyan) !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 10px var(--accent-cyan) !important;
 }
 
 /* ── Overlay (hover) ───────────────────────────────────────────── */
@@ -515,6 +611,11 @@
 
 /* Mobile Touch Scroll-Snap Carousel (<= 768px) */
 @media (max-width: 768px) {
+  .project-inner-swiper .swiper-button-next,
+  .project-inner-swiper .swiper-button-prev {
+    opacity: 0.9 !important;
+  }
+
   .projects-grid {
     display: flex;
     flex-wrap: nowrap;

@@ -8,9 +8,40 @@
       <p>{{ translation.translate('projects.subtitle') }}</p>
     </div>
 
-    <!-- Grille des projets : Boucle dynamique sur la liste des projets avec Angular @for -->
+    <!-- Barre de filtres par catégorie -->
+    <div class="projects-filter-bar reveal" role="tablist" aria-label="Filtres des projets">
+      <button
+        class="filter-pill magnetic"
+        [class.active]="activeCategory() === 'all'"
+        (click)="setFilter('all')"
+        role="tab"
+        [attr.aria-selected]="activeCategory() === 'all'"
+      >
+        <i class="fas fa-th-large" aria-hidden="true"></i> {{ translation.translate('projects.filter_all') }}
+      </button>
+      <button
+        class="filter-pill magnetic"
+        [class.active]="activeCategory() === 'angular'"
+        (click)="setFilter('angular')"
+        role="tab"
+        [attr.aria-selected]="activeCategory() === 'angular'"
+      >
+        <i class="fab fa-angular" aria-hidden="true"></i> {{ translation.translate('projects.filter_angular') }}
+      </button>
+      <button
+        class="filter-pill magnetic"
+        [class.active]="activeCategory() === 'fullstack'"
+        (click)="setFilter('fullstack')"
+        role="tab"
+        [attr.aria-selected]="activeCategory() === 'fullstack'"
+      >
+        <i class="fas fa-layer-group" aria-hidden="true"></i> {{ translation.translate('projects.filter_fullstack') }}
+      </button>
+    </div>
+
+    <!-- Grille des projets : Boucle dynamique sur les projets filtrés avec Angular @for -->
     <div class="projects-grid reveal" role="list">
-      @for (project of projects(); track project.id; let idx = $index) {
+      @for (project of filteredProjects(); track project.id; let idx = $index) {
         <div class="project-wrapper" role="listitem">
           <article
             class="project-glass-card glass-card magnetic"
