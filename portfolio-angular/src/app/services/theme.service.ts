@@ -24,7 +24,7 @@ export class ThemeService {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const initialDark = saved === 'dark' || (!saved && prefersDark);
       this.isDarkTheme.set(initialDark);
-      this.applyTheme(initialDark);
+      this.applyCurrentTheme();
     }
   }
 
@@ -32,16 +32,16 @@ export class ThemeService {
   toggleTheme() {
     const nextDark = !this.isDarkTheme();
     this.isDarkTheme.set(nextDark);
-    this.applyTheme(nextDark);
+    this.applyCurrentTheme();
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('theme', nextDark ? 'dark' : 'light');
     }
   }
 
-  /** Applique la classe CSS 'dark' sur <html> */
-  private applyTheme(dark: boolean) {
+  /** Applique la classe CSS 'dark' sur <html> en fonction de l'état réactif */
+  private applyCurrentTheme() {
     const root = this.document.documentElement;
-    if (dark) {
+    if (this.isDarkTheme()) {
       this.renderer.addClass(root, 'dark');
     } else {
       this.renderer.removeClass(root, 'dark');
