@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslationService } from '../../services/translation.service';
@@ -15,13 +15,13 @@ import { TranslationService } from '../../services/translation.service';
  * Gère l'inscription à la Newsletter et le bouton flottant "Retour en haut".
  */
 export class Footer {
+  private readonly SCROLL_THRESHOLD_BACK_TO_TOP = 500;
+
+  private platformId = inject(PLATFORM_ID);
+  public translation = inject(TranslationService);
+
   newsletterStatus: 'idle' | 'loading' | 'success' | 'error' = 'idle';
   showBackToTop = false;
-
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    public translation: TranslationService,
-  ) {}
 
   /**
    * Envoi du formulaire de newsletter de façon asynchrone (via Formspree).
@@ -60,7 +60,7 @@ export class Footer {
   @HostListener('window:scroll', [])
   onWindowScroll() {
     if (isPlatformBrowser(this.platformId)) {
-      this.showBackToTop = window.scrollY > 500;
+      this.showBackToTop = window.scrollY > this.SCROLL_THRESHOLD_BACK_TO_TOP;
     }
   }
 
