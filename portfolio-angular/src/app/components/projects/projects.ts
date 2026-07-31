@@ -107,10 +107,22 @@ export class Projects implements AfterViewInit, OnDestroy {
     }
   }
 
+  private swiperInstances: Swiper[] = [];
+
   ngOnDestroy() {
+    this.destroySwipers();
     if (this.autoScrollInterval) {
       clearInterval(this.autoScrollInterval);
     }
+  }
+
+  private destroySwipers() {
+    this.swiperInstances.forEach((instance) => {
+      if (instance && !instance.destroyed) {
+        instance.destroy(true, true);
+      }
+    });
+    this.swiperInstances = [];
   }
 
   /**
@@ -155,6 +167,7 @@ export class Projects implements AfterViewInit, OnDestroy {
    * Initialise de manière isolée les carrousels Swiper pour chaque carte de projet.
    */
   private initSwipers() {
+    this.destroySwipers();
     setTimeout(() => {
       document.querySelectorAll('.project-glass-card').forEach((card) => {
         const swiperContainer = card.querySelector('.project-inner-swiper') as HTMLElement;
@@ -163,7 +176,7 @@ export class Projects implements AfterViewInit, OnDestroy {
         const prevEl = card.querySelector('.swiper-button-prev') as HTMLElement;
         const paginationEl = card.querySelector('.project-img-pagination') as HTMLElement;
 
-        new Swiper(swiperContainer, {
+        const instance = new Swiper(swiperContainer, {
           modules: [Navigation, Pagination],
           slidesPerView: 1,
           loop: false,
@@ -172,7 +185,8 @@ export class Projects implements AfterViewInit, OnDestroy {
           navigation: { nextEl, prevEl },
           pagination: { el: paginationEl, clickable: true },
         });
+        this.swiperInstances.push(instance);
       });
-    }, 400);
+    }, 200);
   }
 }
