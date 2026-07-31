@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, PLATFORM_ID, Inject, signal } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, PLATFORM_ID, Inject, signal, computed } from '@angular/core';
 import { CommonModule, isPlatformBrowser, NgClass } from '@angular/common';
 import { TranslationService } from '../../services/translation.service';
 import { GithubService, RepoStats } from '../../services/github';
@@ -8,6 +8,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 interface Project {
   id: string;
   repo: string;
+  category: 'angular' | 'fullstack' | 'uiux';
   images: string[];
   tags: string[];
   githubUrl: string;
@@ -24,16 +25,18 @@ interface Project {
 })
 /**
  * Composant Projets
- * Affiche une grille de projets interactifs avec carrousels d'images et stats GitHub.
+ * Affiche une grille de projets interactifs avec filtres par catégorie, carrousels d'images isolés et stats GitHub.
  */
 export class Projects implements AfterViewInit, OnDestroy {
   private autoScrollInterval: any;
-  // Signal réactif contenant la liste des projets.
-  // L'utilisation de Signal permet une mise à jour fluide de l'UI lors de la réception des stats GitHub.
+
+  activeCategory = signal<string>('all');
+
   projects = signal<Project[]>([
     {
       id: 'p1',
       repo: 'LeYASSOUNG/ShopAfrica',
+      category: 'fullstack',
       images: ['Assets/images/quicklodge_1.png', 'Assets/images/quicklodge_2.png'],
       tags: ['Angular', 'Java', 'PostgreSQL'],
       githubUrl: 'https://github.com/LeYASSOUNG/ShopAfrica',
@@ -42,6 +45,7 @@ export class Projects implements AfterViewInit, OnDestroy {
     {
       id: 'p2',
       repo: 'LeYASSOUNG/gestion-stock',
+      category: 'fullstack',
       images: ['Assets/images/lumina_1.png', 'Assets/images/lumina_2.png'],
       tags: ['Next.js', 'Node.js', 'Spring Boot'],
       githubUrl: 'https://github.com/LeYASSOUNG/gestion-stock',
@@ -50,6 +54,7 @@ export class Projects implements AfterViewInit, OnDestroy {
     {
       id: 'p3',
       repo: 'LeYASSOUNG/portfolio',
+      category: 'angular',
       images: ['Assets/images/midnight_1.png', 'Assets/images/midnight_2.png'],
       tags: ['Angular', 'UI/UX', 'PWA'],
       githubUrl: 'https://github.com/LeYASSOUNG/portfolio',
@@ -57,11 +62,24 @@ export class Projects implements AfterViewInit, OnDestroy {
     },
   ]);
 
+  filteredProjects = computed(() => {
+    const cat = this.activeCategory();
+    if (cat === 'all') return this.projects();
+    return this.projects().filter((p) => p.category === cat);
+  });
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     public translation: TranslationService,
     private github: GithubService,
   ) {}
+
+  setFilter(category: string) {
+    this.activeCategory.set(category);
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => this.initSwipers(), 200);
+    }
+  }
 
   /**
    * Initialisation : Récupération asynchrone des statistiques GitHub (Stars/Forks).
@@ -111,7 +129,7 @@ export class Projects implements AfterViewInit, OnDestroy {
       grid.addEventListener(
         'touchend',
         () => {
-          setTimeout(() => (isTouching = false), 3000); // Pause the auto-scroll for 3s after touch
+          setTimeout(() => (isTouching = false), 3000);
         },
         { passive: true },
       );
@@ -125,29 +143,36 @@ export class Projects implements AfterViewInit, OnDestroy {
         const cardWidth = card ? card.clientWidth : 300;
 
         if (currentScroll >= maxScroll - 10) {
-          grid.scrollTo({ left: 0, behavior: 'smooth' }); // Rewind to start
+          grid.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
-          grid.scrollTo({ left: currentScroll + cardWidth, behavior: 'smooth' }); // Scroll to next
+          grid.scrollTo({ left: currentScroll + cardWidth, behavior: 'smooth' });
         }
       }, 5000);
-    }, 1000); // Attend que le DOM soit complètement rendu
+    }, 1000);
   }
 
   /**
-   * Initialise les carrousels Swiper pour les images de chaque projet.
+   * Initialise de manière isolée les carrousels Swiper pour chaque carte de projet.
    */
   private initSwipers() {
     setTimeout(() => {
-      // Configuration des carrousels internes imbriqués
-      new Swiper('.project-inner-swiper', {
-        modules: [Navigation, Pagination],
-        slidesPerView: 1,
-        loop: false, // Pas de boucle infinie pour les images
-        nested: true, // Indique que le swiper est imbriqué (évite les conflits de swipe)
-        touchReleaseOnEdges: true, // Permet de continuer le scroll de la page après la dernière image
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        pagination: { el: '.project-img-pagination', type: 'fraction' },
+      document.querySelectorAll('.project-glass-card').forEach((card) => {
+        const swiperContainer = card.querySelector('.project-inner-swiper') as HTMLElement;
+        if (!swiperContainer) return;
+        const nextEl = card.querySelector('.swiper-button-next') as HTMLElement;
+        const prevEl = card.querySelector('.swiper-button-prev') as HTMLElement;
+        const paginationEl = card.querySelector('.project-img-pagination') as HTMLElement;
+
+        new Swiper(swiperContainer, {
+          modules: [Navigation, Pagination],
+          slidesPerView: 1,
+          loop: false,
+          nested: true,
+          touchReleaseOnEdges: true,
+          navigation: { nextEl, prevEl },
+          pagination: { el: paginationEl, clickable: true },
+        });
       });
-    }, 600);
+    }, 400);
   }
 }

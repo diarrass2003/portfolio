@@ -8,6 +8,60 @@
   height: auto !important;
 }
 
+/* ── Category Filter Bar ───────────────────────────────────────── */
+.projects-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 30px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.filter-pill i {
+  font-size: 0.95rem;
+  color: currentColor;
+  transition: transform 0.3s var(--ease);
+}
+
+.filter-pill:hover {
+  color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.2);
+}
+
+.filter-pill:hover i {
+  transform: scale(1.15);
+}
+
+.filter-pill.active {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+}
+
+.filter-pill.active i {
+  color: #ffffff;
+}
+
 /* ── Projects Grid Layout ───────────────────────────────────────── */
 .projects-grid {
   display: grid;
@@ -176,20 +230,39 @@
   font-size: 20px;
 }
 
-/* ── Inner Fraction Pagination ─────────────────────────────────── */
+/* ── Inner Bullet Pagination ─────────────────────────────────── */
 .project-img-pagination {
   position: absolute;
-  bottom: 10px !important;
-  right: 10px !important;
-  left: auto !important;
+  bottom: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%);
   width: auto !important;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  padding: 2px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
   border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
   z-index: 10;
+}
+
+.project-img-pagination .swiper-pagination-bullet {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  opacity: 0.7 !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer;
+}
+
+.project-img-pagination .swiper-pagination-bullet-active {
+  width: 20px !important;
+  border-radius: 10px !important;
+  background: var(--accent-cyan) !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 10px var(--accent-cyan) !important;
 }
 
 /* ── Overlay (hover) ───────────────────────────────────────────── */
