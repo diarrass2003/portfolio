@@ -1,4 +1,12 @@
 /* herald-disable max_file_lines */
+/* ── Fail-safe Visibility ───────────────────────────────────────── */
+.projects-section .reveal,
+.projects-section .reveal.visible {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
 /* ── Projects Global Swiper ───────────────────────────────────── */
 .projects-global-swiper {
   padding: 20px 0 70px !important;
