@@ -6,3 +6,7 @@ portfolio-angular/public/Assets/js/browser@4.js
 portfolio-angular/public/Assets/fonts/css2.css
 portfolio-angular/public/Assets/css/**
 portfolio-angular/src/**/*.css
+**/*.css
+**/style.css
+**/cv.css
+**/projects.css
