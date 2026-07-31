@@ -86,6 +86,7 @@
   overflow: hidden;
   border-radius: 24px 24px 0 0;
   background: var(--bg-card);
+  flex-shrink: 0;
 }
 
 /* ── Glass Card ────────────────────────────────────────────────── */
@@ -195,18 +196,20 @@
 }
 
 /* ── Inner Swiper ──────────────────────────────────────────────── */
-.project-inner-swiper,
+.project-inner-swiper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px 24px 0 0;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
 .project-inner-swiper .swiper-wrapper,
 .project-inner-swiper .swiper-slide {
   width: 100%;
-  height: 100% !important;
-  min-height: 0;
-}
-
-.project-inner-swiper {
-  border-radius: 18px;
-  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
-  z-index: 1;
+  height: 100%;
 }
 
 .project-img-container.shimmer-wrapper::after {
