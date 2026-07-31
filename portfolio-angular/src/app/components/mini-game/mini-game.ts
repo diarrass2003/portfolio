@@ -9,6 +9,8 @@ type BoardCell = {
   found: boolean;
 };
 
+type Placement = { row: number; col: number; dir: Direction };
+
 type WordItem = {
   word: string;
   found: boolean;
@@ -213,7 +215,7 @@ export class MiniGame {
     }
   }
 
-  private canPlaceWord(board: string[][], word: string, placement: { row: number; col: number; dir: Direction }): boolean {
+  private canPlaceWord(board: string[][], word: string, placement: Placement): boolean {
     const { row, col, dir } = placement;
     for (let i = 0; i < word.length; i++) {
       const rr = row + dir.r * i;
@@ -225,7 +227,7 @@ export class MiniGame {
     return true;
   }
 
-  private placeWord(board: string[][], word: string, placement: { row: number; col: number; dir: Direction }): void {
+  private placeWord(board: string[][], word: string, placement: Placement): void {
     const { row, col, dir } = placement;
     for (let i = 0; i < word.length; i++) {
       const rr = row + dir.r * i;

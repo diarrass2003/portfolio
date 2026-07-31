@@ -1,7 +1,8 @@
-import { Component, HostListener, Inject, PLATFORM_ID, Renderer2, RendererFactory2 } from '@angular/core';
+import { Component, HostListener, inject, PLATFORM_ID } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser, CommonModule } from '@angular/common';
 import { TranslationService } from '../../services/translation.service';
 import { PwaInstallService } from '../../services/pwa-install.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,32 +11,22 @@ import { PwaInstallService } from '../../services/pwa-install.service';
 })
 /**
  * Composant de la barre de navigation.
- * Il assure le routage intra-page, le basculement mobile (Hamburger)
- * et gère la préférence utilisateur pour le mode sombre.
+ * Assure le routage intra-page, le basculement mobile (Hamburger)
+ * et délègue la gestion des thèmes au ThemeService (SOLID).
  */
 export class Navbar {
   activeSection = 'home';
   isMenuOpen = false;
-  isDarkTheme = false;
   isScrolled = false;
 
-  private renderer: Renderer2;
+  private document = inject(DOCUMENT);
+  private platformId = inject(PLATFORM_ID);
+  public translation = inject(TranslationService);
+  public pwaInstall = inject(PwaInstallService);
+  public themeService = inject(ThemeService);
 
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    public translation: TranslationService,
-    public pwaInstall: PwaInstallService,
-    private rendererFactory: RendererFactory2
-  ) {
-    this.renderer = this.rendererFactory.createRenderer(null, null);
-    // Restaure le thème sauvegardé, ou utilise la préférence système du navigateur
-    if (isPlatformBrowser(this.platformId)) {
-      const saved = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      this.isDarkTheme = saved === 'dark' || (!saved && prefersDark);
-      this.applyTheme(this.isDarkTheme);
-    }
+  get isDarkTheme(): boolean {
+    return this.themeService.isDarkTheme();
   }
 
   /** Ouvre ou ferme le menu de la version mobile (Hamburger) */
@@ -56,28 +47,13 @@ export class Navbar {
 
   /** Bascule manuellement entre le Thème Clair et le Thème Sombre */
   toggleTheme() {
-    this.isDarkTheme = !this.isDarkTheme;
-    this.applyTheme(this.isDarkTheme);
-    // Sauvegarde en localStorage pour les prochaines visites
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
-    }
+    this.themeService.toggleTheme();
   }
 
   /** Bascule entre le Français et l'Anglais */
   toggleLanguage() {
     const newLang = this.translation.currentLang() === 'fr' ? 'en' : 'fr';
     this.translation.setLanguage(newLang);
-  }
-
-  /** Applique la classe CSS globale 'dark' sur l'élément racine <html> */
-  private applyTheme(dark: boolean) {
-    const root = this.document.documentElement;
-    if (dark) {
-      this.renderer.addClass(root, 'dark');
-    } else {
-      this.renderer.removeClass(root, 'dark');
-    }
   }
 
   /**
