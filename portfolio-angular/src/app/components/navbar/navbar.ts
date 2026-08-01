@@ -65,7 +65,7 @@ export class Navbar {
     if (isPlatformBrowser(this.platformId)) {
       this.isScrolled = window.scrollY > 20;
 
-      const sections = ['home', 'about', 'skills', 'projects', 'game', 'contact'];
+      const sections = ['home', 'about', 'company', 'skills', 'projects', 'game', 'contact'];
       for (const section of sections) {
         const element = this.document.getElementById(section);
         if (element) {

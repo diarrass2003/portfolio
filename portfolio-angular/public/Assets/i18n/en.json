@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "about": "About",
+    "company": "Company",
     "skills": "Skills",
     "projects": "Projects",
     "game": "Puzzle",
@@ -53,6 +54,27 @@
     "tl3_date": "2023 – 2026",
     "tl3_org": "Polytechnic University of Bingerville",
     "tl3_desc": "Bachelor MIAGE — Applied Computer Methods for Business Management."
+  },
+  "company": {
+    "title": "My Company",
+    "subtitle": "Software engineering, hotel management solutions and custom digital transformation.",
+    "badge": "Digital & Tech Solutions",
+    "slogan": "Innovate. Transform. Scale.",
+    "vision": "We design high-performance web & mobile platforms and cloud architectures tailored for business growth.",
+    "s1_title": "Web & Mobile Development",
+    "s1_desc": "Modern web applications with Angular, Next.js and responsive cross-platform mobile apps.",
+    "s2_title": "Hospitality & E-Commerce Solutions",
+    "s2_desc": "Integration of hotel booking platforms (QuickLodge) with Wave & Orange Money mobile payments.",
+    "s3_title": "Cloud Architecture & APIs",
+    "s3_desc": "High-performance REST APIs, PostgreSQL/MySQL databases, and Spring Boot & Node.js microservices.",
+    "stat1_val": "99.9%",
+    "stat1_lbl": "Availability & Reliability",
+    "stat2_val": "100%",
+    "stat2_lbl": "On-Time Project Delivery",
+    "stat3_val": "24/7",
+    "stat3_lbl": "Support & Maintenance",
+    "cta_quote": "Get a Free Quote",
+    "cta_contact": "Talk to an Expert"
   },
   "skills": {
     "title": "Skills",

@@ -2,6 +2,7 @@
   "nav": {
     "home": "Accueil",
     "about": "À propos",
+    "company": "Entreprise",
     "skills": "Compétences",
     "projects": "Projets",
     "game": "Puzzle",
@@ -53,6 +54,27 @@
     "tl3_date": "2023 – 2026",
     "tl3_org": "Université Polytechnique de Bingerville",
     "tl3_desc": "Licence MIAGE — Méthodes Informatiques Appliquées à la Gestion des Entreprises."
+  },
+  "company": {
+    "title": "Mon Entreprise",
+    "subtitle": "Ingénierie logicielle, solutions hôtelières et transformation digitale sur mesure.",
+    "badge": "Solutions Digitales & Tech",
+    "slogan": "Innover. Transformer. Scaler.",
+    "vision": "Nous concevons des plateformes web & mobiles haute performance et des architectures cloud taillées pour la croissance des entreprises.",
+    "s1_title": "Développement Web & Mobile",
+    "s1_desc": "Applications web modernes avec Angular, Next.js et applications mobiles multiplateformes réactives.",
+    "s2_title": "Solutions Hôtelières & E-Commerce",
+    "s2_desc": "Intégration de plateformes de réservation hôtelière (QuickLodge) avec paiement mobile Wave & Orange Money.",
+    "s3_title": "Architecture Cloud & APIs",
+    "s3_desc": "APIs REST hautes performances, bases de données PostgreSQL/MySQL et microservices Spring Boot & Node.js.",
+    "stat1_val": "99.9%",
+    "stat1_lbl": "Disponibilité & Fiabilité",
+    "stat2_val": "100%",
+    "stat2_lbl": "Projets Livrés à Temps",
+    "stat3_val": "24/7",
+    "stat3_lbl": "Support & Maintenance",
+    "cta_quote": "Demander un devis gratuit",
+    "cta_contact": "Parler à un expert"
   },
   "skills": {
     "title": "Compétences",
